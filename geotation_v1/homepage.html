@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Homepage</title>
+    <link rel="stylesheet" href="./style/homepage.css">
+</head>
+<body>
+    <header>
+        <h1> 
+            <img src="logo.png" alt="logo" width="125">
+        </h1>
+        <nav>
+            <ul class="home-menu">
+                <li><a class="had" href="diary.html">日記投稿</a></li>
+                <li><a class="had" href="spot.html">スポット投稿</a></li>
+                <li><a class="had" href="ranking.html">ランキング・検索</a></li>
+                <li>
+                    <form class="search-form" action="search.html" method="get">
+                        <input type="text" name="query" placeholder="検索...">
+                        <button type="submit">検索</button>
+                    </form>
+                </li>
+                <li><a class="login" href="login.html">ログイン</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>オススメの観光地</h1>
+        <section class="spot-light">
+            <div class="spot">
+                <img src="spot1.jpg" alt="Spot 1">
+                <h2>観光地 1</h2>
+                <p>観光地 1の説明</p>
+            </div>
+            <div class="spot">
+                <img src="spot2.jpg" alt="Spot 2">
+                <h2>観光地 2</h2>
+                <p>観光地 2の説明</p>
+            </div>
+            <div class="spot">
+                <img src="spot3.jpg" alt="Spot 3">
+                <h2>観光地 3</h2>
+                <p>観光地 3の説明</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <img src="footer-logo.png" alt="ロゴ" width="125">
+        <div class="sns-icons">
+            <a href="#"><img src="twitter.png" alt="twitter" width="32"></a>
+            <a href="#"><img src="facebook.png" alt="facebook" width="32"></a>
+            <a href="#"><img src="instagram.png" alt="instagram" width="32"></a>
+        </div>
+        <small>Copyright &copy;2023 ECC . All Rights Reserved.</small>
+    </footer>
+</body>
+</html>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/homepage.css">
 </head>
 <body>
+    <!-- ヘッダー部分 -->
     <header>
         <h1> 
             <img src="../img/logo.png" alt="logo" width="125">
@@ -16,18 +17,16 @@
                 <li><a class="had" href="./diary.html">日記投稿</a></li>
                 <li><a class="had" href="./spot.html">スポット投稿</a></li>
                 <li><a class="had" href="./ranking.html">ランキング・検索</a></li>
-                <li>
-                    <form class="search-form" action="search.html" method="get">
-                        <input type="text" name="query" placeholder="検索...">
-                        <button type="submit">検索</button>
-                    </form>
-                </li>
-                <li><a class="login" href="./login.html">ログイン</a></li>
+                <li><a class="login" href="./login.html">新規登録・ログイン</a></li>
             </ul>
         </nav>
     </header>
+    <!-- メイン画面 -->
     <main>
-        <h2>オススメの観光地</h2>
+        <div class="section-header">
+            <h2>オススメの観光地</h2>
+            <a class="more-link" href="./ranking.html">もっと見る</a>
+        </div>
         <section class="spot-light">
             <div class="spot">
                 <img src="spot1.jpg" alt="Spot 1">
@@ -51,7 +50,10 @@
             </div>
         </section>
 
-        <h2>スポットの人気ランキング</h2>
+        <div class="section-header">
+            <h2>スポットの人気ランキング</h2>
+            <a class="more-link" href="./ranking.html">もっと見る</a>
+        </div>
         <section class="spot-light">
             <div class="spot">
                 <img src="spot1.jpg" alt="Spot 1">
@@ -75,7 +77,10 @@
             </div>
         </section>
 
-        <h2>日記人気ランキング</h2>
+        <div class="section-header">
+            <h2>日記人気ランキング</h2>
+            <a class="more-link" href="./ranking.html">もっと見る</a>
+        </div>
         <section class="spot-light">
             <div class="spot">
                 <img src="spot1.jpg" alt="Spot 1">
@@ -98,7 +103,6 @@
                 <p>観光地 4の説明</p>
             </div>
         </section>
-
     </main>
     <footer>
         <img src="../img/logo.png" alt="ロゴ" width="125">

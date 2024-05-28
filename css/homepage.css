@@ -8,19 +8,24 @@ body {
 
 header {
     background-color: #F2E9B6;
-    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
 }
 
-header h1 img {
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left h1 img {
     display: block;
+    width: 300px;
+    height: 80px;
+    margin-right: 20px;
 }
-nav{
-   width: 100%;
-}
+
 nav ul {
     list-style: none;
     margin: 0;
@@ -29,57 +34,32 @@ nav ul {
     align-items: center;
 }
 
-nav ul li .had {
+nav ul li {
     margin-left: 20px;
-    position: relative;
-    white-space: nowrap; /* リンクを折り返さないようにする */
 }
 
-nav ul li .login {
-    margin-left: 50em; /* 右側のマージンを追加 */
-    position: relative;
-}
 nav ul li a {
     text-decoration: none;
+    font-size: 20px;
     color: black;
     font-weight: bold;
 }
 
-
-nav ul li a.login {
-    background-color: #393D48;
-    color: white;
-    padding: 8px 10px;
-    border-radius: 5px;
-}
-
-nav ul li a.login:hover {
-    background-color: #0000ff;
-}
-
-.search-form {
+.header-right {
     display: flex;
     align-items: center;
 }
 
-.search-form input {
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    margin-right: 5px;
-}
-
-.search-form button {
-    padding: 5px 10px;
-    border: none;
-    background-color: #333;
+.login-button {
+    background-color: #393D48;
     color: white;
-    border-radius: 3px;
-    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 5px;
+    text-decoration: none;
 }
 
-.search-form button:hover {
-    background-color: #555;
+.login-button:hover {
+    background-color: #0000ff;
 }
 
 main {
@@ -87,6 +67,7 @@ main {
     background-color: #FFFEDE;
 }
 
+/* Additional styles for the rest of the layout */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -112,9 +93,12 @@ main {
 }
 
 .spot-light {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
     padding: 0 0 30px 0;
 }
 
@@ -123,10 +107,10 @@ main {
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 10px;
-    margin: 10px;
-    width: 300px;
+    width: 280px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+    box-sizing: border-box;
 }
 
 .spot img {

@@ -1,27 +1,46 @@
 --ここはrootでやること
 ----DBの作成
- CREATE DATABASE IF NOT EXISTS ITS2;
--- testの中のITS1領域に権限付与
-GRANT ALL ON ITS2.* TO dbuser;
--- -- 使うDBの選択
-USE ITS2;
----------------------------------------------------
---ここからITS2領域に入れたら使うこと
--- テーブル削除
+CREATE DATABASE ITS;
+-- USERの作成
+CREATE USER 'dbuser'@'localhost' IDENTIFIED BY 'ecc';
+--dbuserにCREAT権限を付与
+GRANT CREATE ON *.* TO 'dbuser'@'localhost';
+--dbuserにテーブルへの参照権限を付与
+GRANT SELECT ON its.DIARYS_POSTING TO 'dbuser'@'localhost';
+GRANT SELECT ON its.SPOTS_POSTING TO 'dbuser'@'localhost';
+GRANT SELECT ON its.USERS TO 'dbuser'@'localhost';
+-------------------------------------
 
-
--- USERテーブル(ユーザーID、アカウント名、パスワード、メールアドレス)
-
--- SPOTテーブル(アカウント名(投稿者)、住所、写真、備考欄、費用、スポット名)
-
--- SPOT_ANSテーブル(アカウント名(投稿者)、住所、写真、備考欄、費用、スポット名)
-
--- DIARYテーブル(コメント、写真)
-
--- RANKテーブル(スポットランキング、日記ランキング)
-
--- SPOTRANKテーブル(写真、スポット名、いいね数)
-
--- DIARYRANKテーブル(写真、ユーザー名、いいね数)
-
--- 
+--USERSテーブル
+CREATE TABLE USERS (
+    USER_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    NAME VARCHAR(30) NOT NULL,
+    ADDRESS VARCHAR(254) NOT NULL,
+    PASSWORD VARCHAR(64) NOT NULL,
+    CREATED_AT DATETIME NOT NULL,
+    UPDATED_AT DATETIME NOT NULL
+);
+--DIARYS_POSTINGテーブル
+CREATE TABLE DIARYS_POSTING (
+    DIARY_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    USER_ID INT UNSIGNED,
+    TITLE VARCHAR(64) NOT NULL,
+    PHOTO VARCHAR(255),
+    TEXT TEXT,
+    GOOD INT DEFAULT 0,
+    CREATED_AT DATETIME NOT NULL,
+    UPDATED_AT DATETIME NOT NULL,
+    FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID)
+);
+--SPOTS_POSTINGテーブル
+CREATE TABLE SPOTS_POSTING (
+    SPOT_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    USER_ID INT UNSIGNED,
+    TITLE VARCHAR(64) NOT NULL,
+    ADDRESS VARCHAR(161) NOT NULL,
+    COST VARCHAR(10),
+    REMARKS VARCHAR(255),
+    PHOTO VARCHAR(255),
+    STERGOOD DOUBLE DEFAULT 0,
+    FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID)
+);

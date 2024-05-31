@@ -1,3 +1,4 @@
+/* 基本のボックスモデルと背景設定 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,6 +6,8 @@ body {
     box-sizing: border-box;
     background-color: #f4f4f4;
 }
+
+/* ヘッダーのスタイル設定 */
 header {
     background-color: #F2E9B6;
     display: flex;
@@ -12,6 +15,8 @@ header {
     align-items: center;
     padding: 10px 20px;
 }
+
+/* ヘッダー左側のスタイル設定 */
 .header-left {
     display: flex;
     align-items: center;
@@ -24,6 +29,7 @@ header {
     margin-right: 20px;
 }
 
+/* ナビゲーションメニューのスタイル設定 */
 nav ul {
     list-style: none;
     margin: 0;
@@ -43,11 +49,13 @@ nav ul li a {
     font-weight: bold;
 }
 
+/* ヘッダー右側のスタイル設定 */
 .header-right {
     display: flex;
     align-items: center;
 }
 
+/* ログインボタンのスタイル設定 */
 .login-button {
     background-color: #393D48;
     color: white;
@@ -59,11 +67,14 @@ nav ul li a {
 .login-button:hover {
     background-color: #0000ff;
 }
+
+/* メインコンテンツのスタイル設定 */
 main {
     padding: 20px;
     background-color: #FFFEDE;
 }
 
+/* 日記投稿セクションのスタイル設定 */
 .diary-post {
     background-color: #FFFDE7;
     padding: 20px;
@@ -76,6 +87,7 @@ main {
     margin-bottom: 20px;
 }
 
+/* フォームのレイアウトとスタイル設定 */
 .diary-post form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -88,6 +100,7 @@ main {
     display: block;
 }
 
+/* フォームの入力フィールドとテキストエリアのスタイル設定 */
 .diary-post input[type="text"],
 .diary-post input[type="file"],
 .diary-post textarea {
@@ -104,6 +117,7 @@ main {
     resize: vertical;
 }
 
+/* 星評価のスタイル設定 */
 .rating {
     display: flex;
     direction: row; /* 左から右に変更 */
@@ -117,14 +131,17 @@ main {
     transition: color 0.2s;
 }
 
+/* 星にホバーした時のスタイル設定 */
 .star:hover {
     content: '★'; /* ホバー時の星印の表示 */
 }
 
+/* 選択された星にホバーした時のスタイル設定 */
 .star.selected:hover {
     content: '☆'; /* 選択された星のホバー時の表示 */
 }
 
+/* 送信ボタンのスタイル設定 */
 button[type="submit"] {
     grid-column: 1 / -1;
     padding: 10px 20px;
@@ -141,6 +158,7 @@ button[type="submit"]:hover {
     background-color: #0000ff;
 }
 
+/* フッターのスタイル設定 */
 footer {
     background-color: #F2E9B6;
     color: white;

@@ -92,7 +92,7 @@ main {
 }
 
 /* フォームのレイアウトとスタイル設定 */
-.diary-post form {
+.diary-post .item-style {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 20px;
@@ -116,7 +116,7 @@ main {
 }
 
 .photo-group {
-    grid-column: 1;
+    grid-column: 1; 
     display: flex;
     justify-content: center;
     align-items: center;

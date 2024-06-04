@@ -12,7 +12,7 @@
      <header>
         <div class="header-left">
             <a href="./homepage.html">
-            <h1><img src="../image/logo.png" alt="Geocation ロゴ"></h1>
+            <h1><img src="../img/logo.png" alt="Geocation ロゴ"></h1>
         </a>
             <nav>
                 <ul>
@@ -30,7 +30,7 @@
     <main>
         <section class="diary-post">
             <h2>日記投稿</h2>
-            <form>
+              <div class="item-style">
                 <div class="title-group">
                     <label for="title">タイトル</label>
                     <input type="text" id="title" name="title">
@@ -55,61 +55,11 @@
                     </div>
                 </div>
                 <div class="submit-group">
-                    <button type="submit">投稿完了</button>
+                    <button type="submit" id ="addcomp">投稿完了</button>
                 </div>
-            </form>
+              </div>
         </section>
     </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const stars = document.querySelectorAll('.star');
-
-        // デフォルトで★5つを選択状態にする
-        stars.forEach(star => {
-            if (star.getAttribute('data-value') <= 5) {
-                star.classList.add('selected');
-            }
-        });
-
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                const value = star.getAttribute('data-value');
-                stars.forEach(s => {
-                    if (s.getAttribute('data-value') <= value) {
-                        s.classList.add('selected');
-                    } else {
-                        s.classList.remove('selected');
-                    }
-                });
-            });
-        });
-    
-            // 写真のプレビュー表示の設定
-            const photoInput = document.getElementById('photo');
-            const photoLabel = document.getElementById('photo-label');
-            const photoPreview = document.getElementById('photo-preview');
-    
-            photoInput.addEventListener('change', () => {
-                const file = photoInput.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.maxWidth = '100%';
-                        img.style.maxHeight = '100%';
-                        img.style.borderRadius = '5px';
-                        photoPreview.innerHTML = '';
-                        photoPreview.appendChild(img);
-                        photoLabel.style.display = 'none'; // 写真が表示されたらラベルを非表示
-                        photoPreview.style.border = 'none'; // 写真が表示されたら枠を非表示
-                        photoPreview.style.backgroundColor = 'transparent'; // 背景も非表示
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
-    </script>        
+    <script src="../js/diary_post.js"></script>
 </body>
 </html>

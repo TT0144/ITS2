@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geocation - 日記投稿</title>
-    <link rel="stylesheet" href="../css/diary_post.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="../css/diary_post.css">
 </head>
 <body>
-    <!-- ヘッダー部分 -->
-    <header>
+     <!-- ヘッダー部分 -->
+     <header>
         <div class="header-left">
             <a href="./homepage.html">
-                <h1><img src="../image/logo.png" alt="Geocation ロゴ"></h1>
-            </a>
+            <h1><img src="../image/logo.png" alt="Geocation ロゴ"></h1>
+        </a>
             <nav>
                 <ul>
                     <li class="menu-item"><a href="./diary_post.html">日記投稿</a></li>
@@ -26,61 +26,90 @@
             <a href="./login.html" class="login-button">新規登録・ログイン</a>
         </div>
     </header>
-
     <!-- メインコンテンツ -->
     <main>
         <section class="diary-post">
             <h2>日記投稿</h2>
             <form>
-                <label for="title">タイトル</label>
-                <input type="text" id="title" name="title">
-
-                <label for="photo">写真</label>
-                <input type="file" id="photo" name="photo">
-
-                <label for="text">テキスト</label>
-                <textarea id="text" name="text" rows="10"></textarea>
-
-                <!-- 満足度評価の星マーク -->
-                <label for="rating">満足度：</label>
-                <div class="rating">
-                    <span class="star" data-value="1">★</span>
-                    <span class="star" data-value="2">★</span>
-                    <span class="star" data-value="3">★</span>
-                    <span class="star" data-value="4">★</span>
-                    <span class="star" data-value="5">★</span>
+                <div class="title-group">
+                    <label for="title">タイトル</label>
+                    <input type="text" id="title" name="title">
                 </div>
-
-                <button type="submit">投稿完了</button>
+                <div class="photo-group">
+                    <input type="file" id="photo" name="photo" accept="image/*">
+                    <label for="photo" id="photo-label">写真</label>
+                    <div id="photo-preview"></div>
+                </div>
+                <div class="text-group">
+                    <label for="text">テキスト</label>
+                    <textarea id="text" name="text" rows="10"></textarea>
+                </div>
+                <div class="rating-group">
+                    <label for="rating">満足度：</label>
+                    <div class="rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="submit-group">
+                    <button type="submit">投稿完了</button>
+                </div>
             </form>
         </section>
     </main>
 
-    <!-- フッター部分 -->
-    <footer>
-        <img src="../image/logo.png" alt="ロゴ" width="250">
-        <small>Copyright &copy;2023 Geocation. All Rights Reserved.</small>
-    </footer>
-
-    <!-- 満足度評価の星マークの動作設定 -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const stars = document.querySelectorAll('.star');
-            stars.forEach(star => {
-                // 各星にクリックイベントを追加
-                star.addEventListener('click', () => {
-                    const value = star.getAttribute('data-value');
-                    stars.forEach(s => {
-                        // クリックされた星とそれより左の星を★に、それ以外を☆に設定
-                        if (s.getAttribute('data-value') <= value) {
-                            s.innerHTML = '★'; // 選択された星は★を表示
-                        } else {
-                            s.innerHTML = '☆'; // 選択されていない星は☆を表示
-                        }
-                    });
+        const stars = document.querySelectorAll('.star');
+
+        // デフォルトで★5つを選択状態にする
+        stars.forEach(star => {
+            if (star.getAttribute('data-value') <= 5) {
+                star.classList.add('selected');
+            }
+        });
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+                stars.forEach(s => {
+                    if (s.getAttribute('data-value') <= value) {
+                        s.classList.add('selected');
+                    } else {
+                        s.classList.remove('selected');
+                    }
                 });
             });
         });
-    </script> 
+    
+            // 写真のプレビュー表示の設定
+            const photoInput = document.getElementById('photo');
+            const photoLabel = document.getElementById('photo-label');
+            const photoPreview = document.getElementById('photo-preview');
+    
+            photoInput.addEventListener('change', () => {
+                const file = photoInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '100%';
+                        img.style.maxHeight = '100%';
+                        img.style.borderRadius = '5px';
+                        photoPreview.innerHTML = '';
+                        photoPreview.appendChild(img);
+                        photoLabel.style.display = 'none'; // 写真が表示されたらラベルを非表示
+                        photoPreview.style.border = 'none'; // 写真が表示されたら枠を非表示
+                        photoPreview.style.backgroundColor = 'transparent'; // 背景も非表示
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>        
 </body>
 </html>

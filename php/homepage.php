@@ -1,13 +1,40 @@
 <?php
 session_start();
-//ログインする時のセッション
+require_once __DIR__ . "/def.php";
+
+// ログインセッションの確認
 if (!isset($_SESSION['USER_ID'])) {
     header("Location: login.php");
     exit();
 }
+
+// データベース接続
+$dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+try {
+    $conn = new PDO($dsn, DB_USER, DB_PASS);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // スポット情報を取得
+    $stmtSpots = $conn->prepare("
+        SELECT SPOTNAME, PHOTO, REMARKS
+        FROM SPOTS_POSTING
+        ORDER BY CREATED_AT DESC
+        LIMIT 8
+    ");
+    $stmtSpots->execute();
+    $popularSpots = $stmtSpots->fetchAll(PDO::FETCH_ASSOC);
+
+    // 人気日記を取得
+    $stmtDiaries = $conn->prepare("SELECT TITLE, PHOTO, TEXT FROM DIARYS_POSTING ORDER BY GOOD DESC LIMIT 8");
+    $stmtDiaries->execute();
+    $popularDiaries = $stmtDiaries->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
 ?>
-<!DOCTYPE php>
-<php lang="ja">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +45,9 @@ if (!isset($_SESSION['USER_ID'])) {
     <!-- ヘッダー部分 -->
     <header>
         <div class="header-left">
-            <h1><img src="../image/logo.png" alt="Geocation ロゴ"></h1>
+            <a href="./homepage.php">
+                <h1><img src="../image/logo.png" alt="Geocation ロゴ"></h1>
+            </a>
             <nav>
                 <ul>
                     <li class="menu-item"><a href="./diary_post.php">日記投稿</a></li>
@@ -37,182 +66,42 @@ if (!isset($_SESSION['USER_ID'])) {
             <h2>オススメの観光地</h2>
             <a class="more-link" href="./ranking.php">もっと見る</a>
         </div>
-        <section class="spot-light">
-            <div class="spot">
-                <img src="spot1.jpg" alt="Spot 1">
-                <h2>観光地 1</h2>
-                <p>観光地 1の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot2.jpg" alt="Spot 2">
-                <h2>観光地 2</h2>
-                <p>観光地 2の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot3.jpg" alt="Spot 3">
-                <h2>観光地 3</h2>
-                <p>観光地 3の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot4.jpg" alt="Spot 4">
-                <h2>観光地 4</h2>
-                <p>観光地 4の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot5.jpg" alt="Spot 5">
-                <h2>観光地 5</h2>
-                <p>観光地 5の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot6.jpg" alt="Spot 6">
-                <h2>観光地 6</h2>
-                <p>観光地 6の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot7.jpg" alt="Spot 7">
-                <h2>観光地 7</h2>
-                <p>観光地 7の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot8.jpg" alt="Spot 8">
-                <h2>観光地 8</h2>
-                <p>観光地 8の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot9.jpg" alt="Spot 9">
-                <h2>観光地 9</h2>
-                <p>観光地 9の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot10.jpg" alt="Spot 10">
-                <h2>観光地 10</h2>
-                <p>観光地 10の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot11.jpg" alt="Spot 11">
-                <h2>観光地 11</h2>
-                <p>観光地 11の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot12.jpg" alt="Spot 12">
-                <h2>観光地 12</h2>
-                <p>観光地 12の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot13.jpg" alt="Spot 13">
-                <h2>観光地 13</h2>
-                <p>観光地 13の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot14.jpg" alt="Spot 14">
-                <h2>観光地 14</h2>
-                <p>観光地 14の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot15.jpg" alt="Spot 15">
-                <h2>観光地 15</h2>
-                <p>観光地 15の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot16.jpg" alt="Spot 16">
-                <h2>観光地 16</h2>
-                <p>観光地 16の説明</p>
-            </div>
+        <section id="spot-reco">
+            <?php foreach ($popularSpots as $spot): ?>
+                <div class="spot">
+                    <img src="../uploads/<?php echo htmlspecialchars($spot['PHOTO']); ?>" alt="<?php echo htmlspecialchars($spot['SPOTNAME']); ?>">
+                    <h2><?php echo htmlspecialchars($spot['SPOTNAME']); ?></h2>
+                    <p><?php echo htmlspecialchars($spot['REMARKS']); ?></p>
+                </div>
+            <?php endforeach; ?>
         </section>
-    
 
         <div class="section-header">
             <h2>スポットの人気ランキング</h2>
             <a class="more-link" href="./ranking.php">もっと見る</a>
         </div>
-        <section class="spot-light">
-            <div class="spot">
-                <img src="spot1.jpg" alt="Spot 1">
-                <h2>観光地 1</h2>
-                <p>観光地 1の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot2.jpg" alt="Spot 2">
-                <h2>観光地 2</h2>
-                <p>観光地 2の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot3.jpg" alt="Spot 3">
-                <h2>観光地 3</h2>
-                <p>観光地 3の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot4.jpg" alt="Spot 4">
-                <h2>観光地 4</h2>
-                <p>観光地 4の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot5.jpg" alt="Spot 5">
-                <h2>観光地 5</h2>
-                <p>観光地 5の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot6.jpg" alt="Spot 6">
-                <h2>観光地 6</h2>
-                <p>観光地 6の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot7.jpg" alt="Spot 7">
-                <h2>観光地 7</h2>
-                <p>観光地 7の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot8.jpg" alt="Spot 8">
-                <h2>観光地 8</h2>
-                <p>観光地 8の説明</p>
-            </div>
+        <section id="spot-rank">
+            <?php foreach ($popularSpots as $spot): ?>
+                <div class="spot">
+                    <img src="../uploads/<?php echo htmlspecialchars($spot['PHOTO']); ?>" alt="<?php echo htmlspecialchars($spot['SPOTNAME']); ?>">
+                    <h2><?php echo htmlspecialchars($spot['SPOTNAME']); ?></h2>
+                    <p><?php echo htmlspecialchars($spot['REMARKS']); ?></p>
+                </div>
+            <?php endforeach; ?>
         </section>
 
         <div class="section-header">
             <h2>日記人気ランキング</h2>
             <a class="more-link" href="./ranking.php">もっと見る</a>
         </div>
-        <section class="spot-light">
-            <div class="spot">
-                <img src="spot1.jpg" alt="Spot 1">
-                <h2>観光地 1</h2>
-                <p>観光地 1の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot2.jpg" alt="Spot 2">
-                <h2>観光地 2</h2>
-                <p>観光地 2の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot3.jpg" alt="Spot 3">
-                <h2>観光地 3</h2>
-                <p>観光地 3の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot4.jpg" alt="Spot 4">
-                <h2>観光地 4</h2>
-                <p>観光地 4の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot5.jpg" alt="Spot 5">
-                <h2>観光地 5</h2>
-                <p>観光地 5の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot6.jpg" alt="Spot 6">
-                <h2>観光地 6</h2>
-                <p>観光地 6の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot7.jpg" alt="Spot 7">
-                <h2>観光地 7</h2>
-                <p>観光地 7の説明</p>
-            </div>
-            <div class="spot">
-                <img src="spot8.jpg" alt="Spot 8">
-                <h2>観光地 8</h2>
-                <p>観光地 8の説明</p>
-            </div>
+        <section id="diary-rank">
+            <?php foreach ($popularDiaries as $diary): ?>
+                <div class="diary">
+                    <img src="../uploads/<?php echo htmlspecialchars($diary['PHOTO']); ?>" alt="<?php echo htmlspecialchars($diary['TITLE']); ?>">
+                    <h2><?php echo htmlspecialchars($diary['TITLE']); ?></h2>
+                    <p><?php echo htmlspecialchars($diary['TEXT']); ?></p>
+                </div>
+            <?php endforeach; ?>
         </section>
     </main>
     <footer>
@@ -220,4 +109,4 @@ if (!isset($_SESSION['USER_ID'])) {
         <small>Copyright &copy;2023 Geocation . All Rights Reserved.</small>
     </footer>
 </body>
-</php>
+</html>

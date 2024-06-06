@@ -46,7 +46,7 @@ try {
     <header>
         <div class="header-left">
             <a href="./homepage.php">
-                <h1><img src="../image/logo.png" alt="Geocation ロゴ"></h1>
+                <h1><img src="../img/logo.png" alt="Geocation ロゴ"></h1>
             </a>
             <nav>
                 <ul>
@@ -71,7 +71,6 @@ try {
                 <div class="spot">
                     <img src="../uploads/<?php echo htmlspecialchars($spot['PHOTO']); ?>" alt="<?php echo htmlspecialchars($spot['SPOTNAME']); ?>">
                     <h2><?php echo htmlspecialchars($spot['SPOTNAME']); ?></h2>
-                    <p><?php echo htmlspecialchars($spot['REMARKS']); ?></p>
                 </div>
             <?php endforeach; ?>
         </section>
@@ -85,7 +84,6 @@ try {
                 <div class="spot">
                     <img src="../uploads/<?php echo htmlspecialchars($spot['PHOTO']); ?>" alt="<?php echo htmlspecialchars($spot['SPOTNAME']); ?>">
                     <h2><?php echo htmlspecialchars($spot['SPOTNAME']); ?></h2>
-                    <p><?php echo htmlspecialchars($spot['REMARKS']); ?></p>
                 </div>
             <?php endforeach; ?>
         </section>
@@ -99,13 +97,12 @@ try {
                 <div class="diary">
                     <img src="../uploads/<?php echo htmlspecialchars($diary['PHOTO']); ?>" alt="<?php echo htmlspecialchars($diary['TITLE']); ?>">
                     <h2><?php echo htmlspecialchars($diary['TITLE']); ?></h2>
-                    <p><?php echo htmlspecialchars($diary['TEXT']); ?></p>
                 </div>
             <?php endforeach; ?>
         </section>
     </main>
     <footer>
-        <img src="../image/logo.png" alt="ロゴ" width="250">
+        <img src="../img/logo.png" alt="ロゴ" width="250">
         <small>Copyright &copy;2023 Geocation . All Rights Reserved.</small>
     </footer>
 </body>

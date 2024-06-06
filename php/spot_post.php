@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <header>
         <div class="header-left">
             <a href="./homepage.php">
-                <h1><img src="../image/logo.png" alt="Geocation ロゴ"></h1>
+                <h1><img src="../img/logo.png" alt="Geocation ロゴ"></h1>
             </a>
             <nav>
                 <ul>

@@ -37,7 +37,7 @@ try {
 <header>
     <div class="header-left">
         <a href="./homepage.php">
-            <h1><img src="../image/logo.png" alt="Geocation ロゴ"></h1>
+            <h1><img src="../img/logo.png" alt="Geocation ロゴ"></h1>
         </a>
         <nav>
             <ul>
@@ -70,7 +70,7 @@ try {
                 </select>
                 <input type="text" id="searchbox" placeholder="検索キーワードを入力">
                 <div id="searchicon">
-                    <img src="../image/虫眼鏡の無料アイコン8.png" alt="虫眼鏡アイコン" width="20" height="21">
+                    <img src="../img/虫眼鏡の無料アイコン8.png" alt="虫眼鏡アイコン" width="20" height="21">
                 </div>
             </div>
             <div id="results">

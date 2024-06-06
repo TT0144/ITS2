@@ -1,12 +1,11 @@
 --ここはrootでやること
 ----DBの作成
-CREATE DATABASE ITS;
+CREATE DATABASE its;
 -- USERの作成
-CREATE USER 'dbuser'@'localhost' IDENTIFIED BY 'ecc';
+CREATE USER 'geocation'@'localhost' IDENTIFIED BY 'ecc';
 --dbuserにCREATE権限を付与
-GRANT CREATE ON *.* TO 'dbuser'@'localhost';
---dbuserのITS領域にに全権限付与
-GRANT ALL ON ITS.* TO dbuser;
+GRANT ALL PRIVILEGES ON its.* TO 'geocation'@'localhost';
+FLUSH PRIVILEGES;
 -------------------------------------
 
 --USERSテーブル

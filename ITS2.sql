@@ -7,10 +7,6 @@ CREATE USER 'dbuser'@'localhost' IDENTIFIED BY 'ecc';
 GRANT CREATE ON *.* TO 'dbuser'@'localhost';
 --dbuserのITS領域にに全権限付与
 GRANT ALL ON ITS.* TO dbuser;
---dbuserにテーブルへの参照権限を付与
-GRANT SELECT ON its.DIARYS_POSTING TO 'dbuser'@'localhost';
-GRANT SELECT ON its.SPOTS_POSTING TO 'dbuser'@'localhost';
-GRANT SELECT ON its.USERS TO 'dbuser'@'localhost';
 -------------------------------------
 
 --USERSテーブル

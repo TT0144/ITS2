@@ -12,7 +12,7 @@ define( "WEB_ROOT", "http://localhost/ITS2" );
 // DB
 //
 define( "DB_HOST", "localhost" );
-define( "DB_USER", "dbuser" );
+define( "DB_USER", "geocation" );
 define( "DB_PASS", "ecc" );
 define( "DB_NAME", "ITS" );
 define( "DB_CHARSET", "utf8mb4" );

@@ -1,5 +1,12 @@
 <?php
+session_start();
 require_once __DIR__ . '/def.php';
+
+// ログインしているかどうかを確認
+if (!isset($_SESSION['USER_ID'])) {
+    header("Location: login.php");
+    exit();
+}
 
 // エラーメッセージや成功メッセージを格納する変数を初期化
 $errors = [];
@@ -20,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $address = htmlspecialchars($_POST['addressname'], ENT_QUOTES, 'UTF-8');
         $cost = htmlspecialchars($_POST['cost'], ENT_QUOTES, 'UTF-8');
         $remarks = htmlspecialchars($_POST['memo'], ENT_QUOTES, 'UTF-8');
-        $userId = 1; // 仮にログインユーザーIDを1とする
+        $userId = $_SESSION['USER_ID']; // セッションからユーザーIDを取得
 
         // ファイルアップロードを処理
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
@@ -33,10 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $allowTypes = ['jpg', 'png', 'jpeg', 'gif'];
             if (in_array($fileType, $allowTypes)) {
                 // ファイルをサーバにアップロード
-                // ファイルアップロードを処理
                 if (move_uploaded_file($_FILES["photo"]["tmp_name"], $targetFilePath)) {
                     // フォームデータをデータベースに挿入
-                    $stmt = $conn->prepare("INSERT INTO SPOTS_POSTING (USER_ID, SPOTNAME, ADDRESS, COST, REMARKS, PHOTO, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())");
+                    $stmt = $conn->prepare("
+                    INSERT INTO SPOTS_POSTING 
+                    (USER_ID, SPOTNAME, ADDRESS, COST, REMARKS, PHOTO, CREATED_AT, UPDATED_AT) 
+                    VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())
+                    ");
                     $stmt->execute([$userId, $title, $address, $cost, $remarks, $fileName]);
                     // 新しく挿入されたスポットのIDを取得
                     $spotId = $conn->lastInsertId();
@@ -60,7 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,7 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap">
     <link rel="stylesheet" href="../css/spot_post.css" />
 </head>
-
 <body>
     <!-- ヘッダー部分 -->
     <header>
@@ -129,7 +137,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                     <div class="button-group">
                         <a href="./homepage.php" class="BackButton">戻る</a>
-                        <!-- <a href="./spot_detail.php" class="decisionButton">決定</a> -->
                         <button type="submit" class="decisionButton">決定</button>
                     </div>
                 </div>
@@ -137,5 +144,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </main>
 </body>
-
 </html>

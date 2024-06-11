@@ -1,0 +1,243 @@
+/* 基本のボックスモデルと背景設定 */
+body {
+    font-family: 'Merriweather', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    height: 100vh; /* 画面の高さを100%に設定 */
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #F2E9B6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left h1 img {
+    display: block;
+    width: 300px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.login-button {
+    background-color: #393D48;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.login-button:hover {
+    background-color: #0000ff;
+}
+
+/* メインコンテンツのスタイル設定 */
+main {
+    padding: 20px;
+    background-color: #FFFEDE;
+    flex: 1; /* 画面全体を使用するための設定 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 日記投稿セクションのスタイル設定 */
+.diary-post {
+    background-color: #FFFDE7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+}
+
+.diary-post h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* フォームのレイアウトとスタイル設定 */
+.diary-post .item-style {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.title-group,
+.text-group,
+.photo-group,
+.rating-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-group {
+    grid-column: span 2;
+}
+
+.text-group {
+    grid-column: 2;
+}
+
+.photo-group {
+    grid-column: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* ボタンを正方形内に配置するための相対位置 */
+    width: 100%;
+    max-width: 300px; /* 正方形の最大サイズを指定 */
+    aspect-ratio: 1 / 1; /* 正方形を維持 */
+    background-color: #ddd;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.photo-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.photo-group input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+#photo-preview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.photo-group #photo-preview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #ddd; /* デフォルトの枠線 */
+    border-radius: 5px;
+    background-color: #ddd; /* デフォルトの背景色 */
+}
+
+
+.rating-group {
+    grid-column: 1;
+}
+
+.submit-group {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+}
+
+.title-group label,
+.text-group label,
+.photo-group label,
+.rating-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* フォームの入力フィールドとテキストエリアのスタイル設定 */
+.title-group input[type="text"],
+.text-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    font-family: 'Merriweather', 'sans-serif', 'メイリオ'; /* フォントの適用 */
+    font-size: 16px;
+}
+
+.text-group textarea {
+    resize: vertical;
+    height: 300px;
+}
+
+/* 星評価のスタイル設定 */
+.rating-group .rating {
+    display: flex;
+    direction: row; /* 左から右に変更 */
+    justify-content: flex-start;
+}
+
+.rating-group .star {
+    font-size: 2rem;
+    color: transparent; /* デフォルトの星の色 */
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+/* 星にホバーした時のスタイル設定 */
+.rating-group .star:hover,
+.rating-group .star.selected {
+    color: #FFD700; /* ホバー時の星印の表示 */
+}
+
+/* 送信ボタンのスタイル設定 */
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #393D48;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0000ff;
+}

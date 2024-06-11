@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スポット投稿画面</title>
+    <link rel="stylesheet" href="../css/spot_post.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1>スポット投稿</h1>
+            <label for="photo">写真を選択</label>
+            <div class="form-group">
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+                <div id="imagePreview"></div>
+            </div>
+        </div>
+        <div class="right-section">
+            <label for="titlename">タイトル</label>
+            <div class="form-group">
+                <input type="text" class="titlename" id="titlename" name="titlename" />
+            </div>
+            <label for="addressname">住所</label>
+            <div class="form-group">
+                <input type="text" class="addressname" id="addressname" name="addressname" />
+            </div>
+            <label for="cost">費用</label>
+            <div class="form-group">
+                <input type="number" id="cost" name="cost" min="0" step="0.01">
+            </div>
+            <label for="memo">備考</label>
+            <div class="form-group">
+                <textarea id="memo" name="memo"></textarea>
+            </div>
+            <div class="button-group">
+                <a href="" class="BackButton">戻る</a>
+                <a href="" class="decisionButton">決定</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ const results = document.querySelector('#results');
 const searchboxvalue = document.querySelector('#searchbox');
 const radioboxitem = document.querySelector('#radioboxitem');
 const listitem = document.querySelector('#listitem');
-
+var baranch_num = 0
 setradiobotton_update();
 
 //スポットランキング時処理
@@ -12,8 +12,8 @@ document.querySelector('#spot-ranking').addEventListener('click', () => {
   removeserchbox_items();
   removeradiobotton();
   setradiobotton_order();
-  const spot_rank = 1;
-  setitem(spot_rank,"");
+  baranch_num = 1;
+  setitem(1,"",2);
 });
 
 //日記ランキング時処理
@@ -22,10 +22,14 @@ document.querySelector('#diary-ranking').addEventListener('click', () => {
   removeserchbox_items();
   removeradiobotton();
   setradiobotton_order();
-  const diary_rank = 2;
-  setitem(diary_rank,"");
+  baranch_num = 2;
+  createresult_items(2,"",2);
 });
 
+//抽象化クリエイト
+function createresult_items(branch,sort_text,radiovalue){
+  setitem(branch,sort_text,radiovalue);
+}
 //検索項目時処理
 document.querySelector('#search-button').addEventListener('click', () => {
   removeresultitems();
@@ -108,11 +112,12 @@ function setitem(resbranch,sort_text,radiovalue){
     .then(response => response.json()) // 返ってきたレスポンスをjsonで受 け取って次のthenへ渡す
     .then(res => {
       console.log(res)
-      if(resbranch == 1){
+      if(resbranch == 0 || resbranch == 1){
         res[0]["SPOT"].forEach(element => {
           resultitem(results,element['PHOTO'],element['SPOTNAME'],element['SPOTNAME'],element["SPOT_ID"],element["REMARKS"])
         });
-      }else{
+      }
+      if(resbranch == 0 || resbranch == 2){
         res[0]["DIARY"].forEach(element => {
           if(!element['PHOTO']){
             element['PHOTO'] = '../img/noimage.png'
@@ -158,16 +163,10 @@ listitem.addEventListener('click', (event) => {
   }
   //ラジオボタンを変更したとき
   if(event.target.closest('[type="radio"]')){
-    removeresultitems();
-    //ラジオボタン、入力、プルダウンの読み取り
     const radiovalue = checkradiobotton();
-    const searchboxvalue = document.querySelector('#searchbox').value;
-    const pulldownvalue = document.querySelector('#selectsort').value;
-    if(!searchboxvalue == ""){
-      setitem(pulldownvalue,searchboxvalue,radiovalue);
-    }else{
-      //要素削除
+    if(radiovalue == 1 || radiovalue == 2 ){
       removeresultitems();
+      setitem(baranch_num,"",radiovalue);
     }
   }
 });

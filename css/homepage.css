@@ -133,6 +133,10 @@ main {
     text-align: center;
     box-sizing: border-box;
 }
+.spot:hover{
+    transform: translateY(-10px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
 
 .spot img {
     max-width: 100%;

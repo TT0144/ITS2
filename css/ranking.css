@@ -110,7 +110,6 @@ main{
   padding-bottom: 30px;
 
 }
-
 #selectsort{
   color: #ffffff;
   background-color: #393D48;
@@ -124,6 +123,18 @@ main{
 #serchbox{
   height: 95%;
   width: 64%;
+}
+
+/* PHPのCSS */
+#searchbox{
+  height: 95%;
+  width: 64%;
+}
+
+/* PHPのCSS */
+#searchbox:focus{
+  outline: 0;
+  box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
 }
 
 #serchbox:focus{
@@ -140,9 +151,28 @@ main{
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+
 #serchicon:hover{
   background: rgba(196, 153, 1, 0.792);
 }
+
+/* PHPのCSS */
+#searchicon{
+  height: 125%;
+  width: 5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  text-align: center;
+  background-color: rgba(191, 165, 70, 0.792);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+/*PHPのCSS*/
+#searchicon:hover{
+  background: rgba(196, 153, 1, 0.792);
+}
+
 .itemimg{
  padding-right: 100px;
 }

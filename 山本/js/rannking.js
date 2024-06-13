@@ -4,6 +4,8 @@ const searchboxvalue = document.querySelector('#searchbox');
 const radioboxitem = document.querySelector('#radioboxitem');
 const listitem = document.querySelector('#listitem');
 
+setradiobotton_update();
+
 //スポットランキング時処理
 document.querySelector('#spot-ranking').addEventListener('click', () => {
   removeserchbox_items();
@@ -24,11 +26,10 @@ document.querySelector('#diary-ranking').addEventListener('click', () => {
 
 //検索項目時処理
 document.querySelector('#search-button').addEventListener('click', () => {
+  removeserchbox_items();
   serchbox_items();
   removeradiobotton();
   setradiobotton_update()
-  const spot_rank = 3;
-  setitem(spot_rank,"");
 });
 
 //ラジオボタン削除
@@ -57,7 +58,9 @@ function serchbox_items(){
 //検索ボックス削除
 function removeserchbox_items(){
   const ranking_select = document.querySelector('#ranking-select');
+  if(ranking_select){
   ranking_select.remove();
+  }
 }
 
 //昇順降順ラジオボタン表示

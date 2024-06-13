@@ -1,31 +1,31 @@
 <!-- <?php
 
-require_once __DIR__ . '/def.php';
-$dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
-try {
-    $conn = new PDO($dsn, DB_USER, DB_PASS);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// require_once __DIR__ . '/def.php';
+// $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+// try {
+//     $conn = new PDO($dsn, DB_USER, DB_PASS);
+//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-    $query = "SELECT SPOTS_POSTING.SPOTNAME, DIARYS_POSTING.STERGOOD, USER.NAME, SPOTS_POSTING.COST, SPOTS_POSTING.ADDRESS, SPOTS_POSTING.REMARKS FROM SPOTS_POSTING
-            JOIN USER ON SPOTS_POSTING.USER_ID = USER.ID 
-            JOIN DIARYS_POSTING ON SPOTS_POSTING.SPOT_ID = DIARYS_POSTING.SPOT_ID 
-            WHERE SPOTS_POSTING.SPOT_ID = :spot_id";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':spot_id', $spot_id);
-    $stmt->execute();
-    $spot_detail = $stmt->fetch(PDO::FETCH_ASSOC);
+//     $query = "SELECT SPOTS_POSTING.SPOTNAME, DIARYS_POSTING.STERGOOD, USER.NAME, SPOTS_POSTING.COST, SPOTS_POSTING.ADDRESS, SPOTS_POSTING.REMARKS FROM SPOTS_POSTING
+//             JOIN USER ON SPOTS_POSTING.USER_ID = USER.ID 
+//             JOIN DIARYS_POSTING ON SPOTS_POSTING.SPOT_ID = DIARYS_POSTING.SPOT_ID 
+//             WHERE SPOTS_POSTING.SPOT_ID = :spot_id";
+//     $stmt = $conn->prepare($query);
+//     $stmt->bindParam(':spot_id', $spot_id);
+//     $stmt->execute();
+//     $spot_detail = $stmt->fetch(PDO::FETCH_ASSOC);
     
-    // 取得した情報を変数に格納
-$spot_name = $spot_detail['SPOTNAME'];
-$satisfaction = $spot_detail['STERGOOD'];
-$registered_by = $spot_detail['NAME'];
-$cost = $spot_detail['COST'];
-$address = $spot_detail['ADDRESS'];
-$remarks = $spot_detail['REMARKS'];
-} catch (PDOException $e) {
-    // エラー処理
-}
+//     // 取得した情報を変数に格納
+// $spot_name = $spot_detail['SPOTNAME'];
+// $satisfaction = $spot_detail['STERGOOD'];
+// $registered_by = $spot_detail['NAME'];
+// $cost = $spot_detail['COST'];
+// $address = $spot_detail['ADDRESS'];
+// $remarks = $spot_detail['REMARKS'];
+// } catch (PDOException $e) {
+//     // エラー処理
+// }
 ?> -->
 
 <!DOCTYPE html>
@@ -70,7 +70,7 @@ $remarks = $spot_detail['REMARKS'];
             <button class="diary-post-btn">日記投稿をする</button>
         </div>
     </main>
-    <script src="../js/spot_detail.js"></script>
+    <sc ript src="../js/spot_detail.js"></script>
 
 </body>
 </html>

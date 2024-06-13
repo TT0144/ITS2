@@ -8,6 +8,7 @@ setradiobotton_update();
 
 //スポットランキング時処理
 document.querySelector('#spot-ranking').addEventListener('click', () => {
+  removeresultitems();
   removeserchbox_items();
   removeradiobotton();
   setradiobotton_order();
@@ -17,6 +18,7 @@ document.querySelector('#spot-ranking').addEventListener('click', () => {
 
 //日記ランキング時処理
 document.querySelector('#diary-ranking').addEventListener('click', () => {
+  removeresultitems();
   removeserchbox_items();
   removeradiobotton();
   setradiobotton_order();
@@ -26,10 +28,11 @@ document.querySelector('#diary-ranking').addEventListener('click', () => {
 
 //検索項目時処理
 document.querySelector('#search-button').addEventListener('click', () => {
+  removeresultitems();
   removeserchbox_items();
-  serchbox_items();
   removeradiobotton();
-  setradiobotton_update()
+  serchbox_items();
+  setradiobotton_update();
 });
 
 //ラジオボタン削除
@@ -85,15 +88,17 @@ function checkradiobotton(){
   }
 }
 
-//APIにデータを送って表示
-//以下引数(第一：日記スポットかあるいはどっちも、第二：検索文字、第三：ラジオボタンの入力（value))
-function setitem(resbranch,sort_text,sort_check,radiovalue){
+//結果表示を消す
+function removeresultitems(){
   //既にある要素を削除
   while(results.firstChild){
     results.removeChild(results.firstChild);
   }
-
-  const branchdata = {branch:resbranch,sort_text:sort_text,radiobottan_sort:sort_check,radiovalue:radiovalue}
+}
+//APIにデータを送って表示
+//以下引数(第一：日記スポットかあるいはどっちも、第二：検索文字、第三：ラジオボタンの入力（value))
+function setitem(resbranch,sort_text,radiovalue){
+  const branchdata = {branch:resbranch,sort_text:sort_text,radiovalue:radiovalue}
   console.log(branchdata);
   fetch('http://localhost/geocation/php/API.php', { // 第1引数に送り先
     method: 'POST', // メソッド指定
@@ -137,18 +142,34 @@ function resultitem(element,img_url,img_name,title_name,spot_id,item_text){
 }
 
 //検索機能
-document.querySelector('#searchicon').addEventListener('click', () => {
-  const radiovalue = checkradiobotton();
-  console.log(radiovalue);
-  const searchboxvalue = document.querySelector('#searchbox').value;
-  const serch_branchnum  = 1;
-  if(!searchboxvalue == ""){
-    setitem(serch_branchnum,searchboxvalue,0,radiovalue);
-  }else{
-    //要素削除
-    while(results.firstChild){
-      results.removeChild(results.firstChild);
-    }  
+listitem.addEventListener('click', (event) => {
+  if(event.target.closest('#searchicon')){
+    removeresultitems();
+    //ラジオボタン、入力、プルダウンの読み取り
+    const radiovalue = checkradiobotton();
+    const searchboxvalue = document.querySelector('#searchbox').value;
+    const pulldownvalue = document.querySelector('#selectsort').value;
+    if(!searchboxvalue == ""){
+      setitem(pulldownvalue,searchboxvalue,radiovalue);
+    }else{
+      //要素削除
+      removeresultitems();
+    }
+  }
+  //ラジオボタンを変更したとき
+  if(event.target.closest('[type="radio"]')){
+    removeresultitems();
+    //ラジオボタン、入力、プルダウンの読み取り
+    const radiovalue = checkradiobotton();
+    const searchboxvalue = document.querySelector('#searchbox').value;
+    const pulldownvalue = document.querySelector('#selectsort').value;
+    if(!searchboxvalue == ""){
+      setitem(pulldownvalue,searchboxvalue,radiovalue);
+    }else{
+      //要素削除
+      removeresultitems();
+    }
   }
 });
+
 

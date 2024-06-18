@@ -139,8 +139,11 @@ main {
 }
 
 .spot img {
+    width: 450px;
+    height: 200px; 
     max-width: 100%;
     border-radius: 10px 10px 0 0;
+     object-fit: cover;
 }
 .diary {
   background-color: white;
@@ -160,7 +163,7 @@ main {
 
 footer {
     background-color: #F2E9B6;
-    color: white;
+    color: black;
     text-align: center;
     padding: 10px 0;
     position: relative;

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . "/def.php";
+// require_once __DIR__ . "/def.php";
 
 // ログインセッションの確認
 if (!isset($_SESSION['USER_ID'])) {
@@ -9,29 +9,29 @@ if (!isset($_SESSION['USER_ID'])) {
 }
 
 // データベース接続
-$dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
-try {
-    $conn = new PDO($dsn, DB_USER, DB_PASS);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+// try {
+//     $conn = new PDO($dsn, DB_USER, DB_PASS);
+//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // スポット情報を取得
-    $stmtSpots = $conn->prepare("
-        SELECT SPOTNAME, PHOTO, REMARKS
-        FROM SPOTS_POSTING
-        ORDER BY CREATED_AT DESC
-        LIMIT 8
-    ");
-    $stmtSpots->execute();
-    $popularSpots = $stmtSpots->fetchAll(PDO::FETCH_ASSOC);
+//     // スポット情報を取得
+//     $stmtSpots = $conn->prepare("
+//         SELECT SPOTNAME, PHOTO, REMARKS
+//         FROM SPOTS_POSTING
+//         ORDER BY CREATED_AT DESC
+//         LIMIT 8
+//     ");
+//     $stmtSpots->execute();
+//     $popularSpots = $stmtSpots->fetchAll(PDO::FETCH_ASSOC);
 
-    // 人気日記を取得
-    $stmtDiaries = $conn->prepare("SELECT TITLE, PHOTO, TEXT FROM DIARYS_POSTING ORDER BY GOOD DESC LIMIT 8");
-    $stmtDiaries->execute();
-    $popularDiaries = $stmtDiaries->fetchAll(PDO::FETCH_ASSOC);
+//     // 人気日記を取得
+//     $stmtDiaries = $conn->prepare("SELECT TITLE, PHOTO, FROM DIARYS_POSTING ORDER BY GOOD DESC LIMIT 8");
+//     $stmtDiaries->execute();
+//     $popularDiaries = $stmtDiaries->fetchAll(PDO::FETCH_ASSOC);
 
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
-}
+// } catch (PDOException $e) {
+//     die("Connection failed: " . $e->getMessage());
+// }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -62,17 +62,12 @@ try {
     </header>
     <!-- メイン画面 -->
     <main>
+      <div id=section-item>
         <div class="section-header">
             <h2>オススメの観光地</h2>
             <a class="more-link" href="./ranking.php">もっと見る</a>
         </div>
         <section id="spot-reco">
-            <?php foreach ($popularSpots as $spot): ?>
-                <div class="spot">
-                    <img src="../uploads/<?php echo htmlspecialchars($spot['PHOTO']); ?>" alt="<?php echo htmlspecialchars($spot['SPOTNAME']); ?>">
-                    <h2><?php echo htmlspecialchars($spot['SPOTNAME']); ?></h2>
-                </div>
-            <?php endforeach; ?>
         </section>
 
         <div class="section-header">
@@ -80,30 +75,19 @@ try {
             <a class="more-link" href="./ranking.php">もっと見る</a>
         </div>
         <section id="spot-rank">
-            <?php foreach ($popularSpots as $spot): ?>
-                <div class="spot">
-                    <img src="../uploads/<?php echo htmlspecialchars($spot['PHOTO']); ?>" alt="<?php echo htmlspecialchars($spot['SPOTNAME']); ?>">
-                    <h2><?php echo htmlspecialchars($spot['SPOTNAME']); ?></h2>
-                </div>
-            <?php endforeach; ?>
         </section>
-
         <div class="section-header">
             <h2>日記人気ランキング</h2>
             <a class="more-link" href="./ranking.php">もっと見る</a>
         </div>
         <section id="diary-rank">
-            <?php foreach ($popularDiaries as $diary): ?>
-                <div class="diary">
-                    <img src="../uploads/<?php echo htmlspecialchars($diary['PHOTO']); ?>" alt="<?php echo htmlspecialchars($diary['TITLE']); ?>">
-                    <h2><?php echo htmlspecialchars($diary['TITLE']); ?></h2>
-                </div>
-            <?php endforeach; ?>
         </section>
+        </div>
     </main>
     <footer>
         <img src="../img/logo.png" alt="ロゴ" width="250">
         <small>Copyright &copy;2023 Geocation . All Rights Reserved.</small>
     </footer>
+    <script src="../js/homepage.js"></script>
 </body>
 </html>

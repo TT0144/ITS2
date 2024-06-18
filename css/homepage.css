@@ -157,8 +157,11 @@ main {
 }
 
 .diary img {
-  max-width: 100%;
-  border-radius: 10px 10px 0 0;
+    width: 450px;
+    height: 200px; 
+    max-width: 100%;
+    border-radius: 10px 10px 0 0;
+     object-fit: cover;
 }
 
 footer {

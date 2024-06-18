@@ -156,6 +156,11 @@ main {
   box-sizing: border-box;
 }
 
+.diary:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
 .diary img {
     width: 450px;
     height: 200px; 

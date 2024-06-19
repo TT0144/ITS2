@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title']);
     $text = trim($_POST['text']);
     $rating = floatval($_POST['rating']);
+    $spot_id = intval($_POST['spot_id']);
 
     if (empty($title)) {
         $errors[] = 'タイトルを入力してください。';
@@ -64,11 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // データベースに挿入する準備
-        $stmt = $mysqli->prepare("INSERT INTO DIARYS_POSTING (USER_ID, TITLE, PHOTO, TEXT, STERGOOD, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, NOW(), NOW())");
+        $stmt = $mysqli->prepare("INSERT INTO DIARYS_POSTING (USER_ID, SPOT_ID, TITLE, PHOTO, TEXT, STERGOOD, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())");
 
         // ログインしているユーザーのIDを使用
         $userId = $_SESSION['USER_ID'];
-        $stmt->bind_param('isssd', $userId, $title, $photoPath, $text, $rating);
+        $stmt->bind_param('iisssd', $userId, $spot_id, $title, $photoPath, $text, $rating);
 
         // クエリを実行
         if ($stmt->execute()) {
@@ -119,17 +120,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
     <!-- メインコンテンツ -->
     <main>
+        <section class="diary-post">
+            <h2>日記投稿</h2>
             <form method="post" enctype="multipart/form-data">
-            <h1>日記投稿</h1>
-            <div class="container">
-                <div class="left-section">
-                    
-                    <label for="photo">写真を選択</label>
+                <input type="hidden" name="spot_id" value="<?php echo htmlspecialchars($_GET['spot_id']); ?>">
+                <div class="item-style">
+                    <div class="title-group">
+                        <label for="title">タイトル</label>
+                        <input type="text" id="title" name="title">
+                    </div>
                     <div class="photo-group">
-                       
-                        <input type="file" id="photo" name="photo" accept="image/*" required>
-                        <label for="photo" id="photo-label"></label>
+                        <input type="file" id="photo" name="photo" accept="image/*">
+                        <label for="photo" id="photo-label">写真</label>
                         <div id="photo-preview"></div>
+                    </div>
+                    <div class="text-group">
+                        <label for="text">テキスト</label>
+                        <textarea id="text" name="text" rows="10"></textarea>
                     </div>
                     <div class="rating-group">
                         <label for="rating">満足度：</label>
@@ -142,26 +149,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <input type="hidden" id="rating" name="rating" value="5">
                     </div>
-                </div>
-                <div class="right-section">
-                    <label for="title">タイトル</label>
-                    <div class="form-group">
-                        <input type="text" class="title" id="title" name="title" required>
+                    <div class="submit-group">
+                        <button type="submit" id="addcomp">投稿完了</button>
                     </div>
-                    <label for="text">テキスト</label>
-                    <div class="form-group">
-                        <textarea id="text" name="text"></textarea>
-                    </div>
-
                 </div>
-                </div>
-                <div class="button-group">
-                        <a href="./homepage.php" class="BackButton">戻る</a>
-                        <button type="submit" class="addcomp">投稿完了</button>
-                    </div>
- 
             </form>
- 
+        </section>
     </main>
     <script src="../js/diary_post.js"></script>
 </body>

@@ -21,29 +21,49 @@ try {
 try {
   
   if($branch == 0){
-    $where = " WHERE 1=1"; // 条件句の初期化
     // ラジオボタンの値に基づいてソート条件を追加
-    if ($radiovalue == 3) {
+    if ($radiovalue == 1) {
       $order = " ORDER BY CREATED_AT DESC";
-    } elseif ($radiovalue == 4) {
+    } elseif ($radiovalue == 2) {
       $order = " ORDER BY CREATED_AT ASC";
+    } elseif ($radiovalue == 3) {
+      $order = " ORDER BY CREATED_AT DESC";
     } else {
-      $order = " ORDER BY CREATED_AT DESC"; // デフォルトのソート順
+      $order = " ORDER BY CREATED_AT ASC"; // デフォルトのソート順
     }
-    
+    $wherespot = "where spotname LIKE :sort_text OR remarks LIKE :sort_text";
+
+    // 検索テキストがあれば条件を追加
+    if(!empty($sort_text)){
+      $sort_textLike = "%" . $sort_text . "%";
+      $wherespot = " where spotname LIKE :sort_text OR remarks LIKE :sort_text";
+    }
+
     // スポット情報を取得（8件まで）
     $stmtSpots = $conn->prepare("
     SELECT SPOT_ID, SPOTNAME, PHOTO, REMARKS
     FROM SPOTS_POSTING
-    " .$order);
+    ".$wherespot.$order);
+    if(!empty($sort_text)){
+      $stmtSpots->bindParam(':sort_text', $sort_textLike, PDO::PARAM_STR);
+    }
     $stmtSpots->execute(); // クエリ実行
     $popularSpots = $stmtSpots->fetchAll(PDO::FETCH_ASSOC); // 結果を配列で取得
 
+
+    // 検索テキストがあれば条件を追加
+    if (!empty($sort_text)) {
+      $sort_textLike = "%" . $sort_text . "%";
+      $wherediary = "where title LIKE :sort_text OR text LIKE :sort_text";
+    }
     // 人気日記を取得（8件まで）
     $stmtDiaries = $conn->prepare("
     SELECT TITLE, PHOTO, DIARY_ID, TEXT
     FROM DIARYS_POSTING
-    " .$order);
+    " .$wherediary.$order);
+    if(!empty($sort_text)){
+      $stmtDiaries->bindParam(':sort_text', $sort_textLike, PDO::PARAM_STR);
+    }
     $stmtDiaries->execute(); // クエリ実行
     $popularDiaries = $stmtDiaries->fetchAll(PDO::FETCH_ASSOC); // 結果を配列で取得
     
@@ -69,11 +89,10 @@ try {
       $order = " ORDER BY CREATED_AT DESC";
     } elseif ($radiovalue == 2) {
       $order = " ORDER BY CREATED_AT ASC";
-    } elseif ($radiovalue == 3) { 
-      $order = " ORDER BY CREATED_AT DESC"; // デフォルトのソート順
-    }elseif ($radiovalue == 4) {
-      $order = " ORDER BY CREATED_AT ASC";
-
+    } elseif ($radiovalue == 3) {
+      $order = " ORDER BY CREATED_AT DESC";
+    } else {
+      $order = " ORDER BY CREATED_AT ASC"; // デフォルトのソート順
     }
 
     // SQL文を準備して実行
@@ -90,7 +109,7 @@ try {
       'SPOT' => spotdatainarray($popularSpots) // スポット情報を配列化して格納
     );
     
-  } elseif($branch == 2){
+  } else{
     // 日記のみを取得
     $sql = "SELECT TITLE, PHOTO, DIARY_ID, TEXT FROM DIARYS_POSTING";
     $where = " WHERE 1=1"; // 条件句の初期化
@@ -101,13 +120,14 @@ try {
       $where .= " AND title LIKE :sort_text OR text LIKE :sort_text";
     }
 
-    // ラジオボタンの値に基づいてソート条件を追加
     if ($radiovalue == 1) {
       $order = " ORDER BY CREATED_AT DESC";
     } elseif ($radiovalue == 2) {
       $order = " ORDER BY CREATED_AT ASC";
+    } elseif ($radiovalue == 3) {
+      $order = " ORDER BY CREATED_AT DESC";
     } else {
-      $order = " ORDER BY CREATED_AT DESC"; // デフォルトのソート順
+      $order = " ORDER BY CREATED_AT ASC"; // デフォルトのソート順
     }
 
     // SQL文を準備して実行
@@ -122,41 +142,6 @@ try {
     // 返却データに日記情報を格納
     $returndata[] = array(
       'DIARY' => diarydatainarray($popularDiaries) // 日記情報を配列化して格納
-    );
-
-  } else {
-    // スポットのみの簡易検索（簡易版）
-    $sql = "SELECT SPOT_ID, SPOTNAME, PHOTO, REMARKS FROM SPOTS_POSTING";
-    $where = " WHERE 1=1"; // 条件句の初期化
-    $order = " ORDER BY CREATED_AT DESC"; // デフォルトのソート順
-
-    // 検索テキストがあれば条件を追加
-    if(!empty($sort_text)){
-      $sort_textLike = "%" . $sort_text . "%";
-      $where .= " AND spotname LIKE :sort_text OR remarks LIKE :sort_text";
-    }
-
-    // ラジオボタンの値に基づいてソート条件を追加
-    if ($radiovalue == 3) {
-      $order = " ORDER BY CREATED_AT DESC";
-    } elseif ($radiovalue == 4) {
-      $order = " ORDER BY CREATED_AT ASC";
-    } else {
-      $order = " ORDER BY CREATED_AT DESC"; // デフォルトのソート順
-    }
-
-    // SQL文を準備して実行
-    $stmt = $conn->prepare($sql . $where . $order);
-    
-    if(!empty($sort_text)){
-      $stmt->bindParam(':sort_text', $sort_textLike, PDO::PARAM_STR);
-    }
-    $stmt->execute(); // クエリ実行
-    $popularSpots = $stmt->fetchAll(PDO::FETCH_ASSOC); // 結果を配列で取得
-
-    // 返却データにスポット情報を格納
-    $returndata[] = array(
-      'SPOT' => spotdatainarray($popularSpots) // スポット情報を配列化して格納
     );
   }
 } catch (PDOException $e) {

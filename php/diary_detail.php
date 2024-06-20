@@ -30,11 +30,11 @@
             <div id="content">
                 <div class="image-container">
                   <img id="imgpass" src="" alt="Location Image">
-                  <button class="BackButton">戻る</button> 
                 </div>
                 <div class="detail">
                 </div>
             </div>
+            <button class="BackButton">戻る</button> 
         </main>
   <script src="../js/diary_detail.js"></script>
 </body>

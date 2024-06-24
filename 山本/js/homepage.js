@@ -4,8 +4,8 @@ const spot_rank = document.querySelector('#spot-rank');
 const diary_rank = document.querySelector('#diary-rank');
 
 //homepage表示分岐変数
-const homepage = {branch:0};
-
+const homepage = {branch:0,sort_text:"",radiovalue:""};
+console.log(homepage);
 //おすすめ欄API
 fetch('http://localhost/geocation/php/API.php', { // 第1引数に送り先
   method: 'POST', // メソッド指定
@@ -16,18 +16,22 @@ fetch('http://localhost/geocation/php/API.php', { // 第1引数に送り先
   .then(res => {
     console.log(res);
     res[0]["SPOT"].forEach(element => {
-      homeitem(spot_reco,element['PHOTO'],element['SPOTNAME'],element['SPOTNAME'],element["SPOT_ID"])
+      if(!element['PHOTO']){
+        element['PHOTO'] = '../img/noimage.png'
+      }
+      spotitem(spot_reco,element['PHOTO'],element['SPOTNAME'],element['SPOTNAME'],element["SPOT_ID"])
     });
     res[0]["SPOT"].forEach(element => {
-      homeitem(spot_rank,element['PHOTO'],element['SPOTNAME'],element['SPOTNAME'],element["SPOT_ID"])
+      if(!element['PHOTO']){
+        element['PHOTO'] = '../img/noimage.png'
+      }
+      spotitem(spot_rank,element['PHOTO'],element['SPOTNAME'],element['SPOTNAME'],element["SPOT_ID"])
     });
     res[0]["DIARY"].forEach(element => {
       if(!element['PHOTO']){
         element['PHOTO'] = '../img/noimage.png'
-        console.log(1);
       }
-      console.log(element['PHOTO']);
-      homeitem(diary_rank,element['PHOTO'],element['TITLE'],element['TITLE'],element["DIARY_ID"])
+      diaryitem(diary_rank,element['PHOTO'],element['TITLE'],element['TITLE'],element["DIARY_ID"])
     });
 
   })
@@ -37,7 +41,7 @@ fetch('http://localhost/geocation/php/API.php', { // 第1引数に送り先
 
 
 //要素を入れて表示　第一：親要素　二：画像そのもの　三：画像説明（最悪なくてもよし）　四：スポットの名前またはタイトル
-function homeitem(element,img_url,img_name,title_name,spot_id){
+function spotitem(element,img_url,img_name,title_name,spot_id){
   element.insertAdjacentHTML('afterbegin', 
   `<div class="spot">
     <img src=../uploads/${img_url} alt=${img_name} id=${spot_id}>
@@ -45,18 +49,37 @@ function homeitem(element,img_url,img_name,title_name,spot_id){
   </div>`);
 }
 
-window.onload = function(){
+//要素を入れて表示　第一：親要素　二：画像そのもの　三：画像説明（最悪なくてもよし）　四：スポットの名前またはタイトル
+function diaryitem(element,img_url,img_name,title_name,spot_id){
+  element.insertAdjacentHTML('afterbegin', 
+  `<div class="diary">
+    <img src=../uploads/${img_url} alt=${img_name} id=${spot_id}>
+    <h2>${title_name}</h2>
+  </div>`);
+}
+
 document.querySelector('#section-item').addEventListener('click', (event) => {
-  // console.log(event.target.closest('.spot'));
-  // const parentitem = event.target.closest('.spot');
   if(event.target.closest('.spot')){
     const  parentitemid = event.target.closest('.spot').firstElementChild.getAttribute('id');
     window.location.href = `http://localhost/geocation/php/spot_detail.php?id=${parentitemid}`;
   }else{
     const  parentitemid = event.target.closest('.diary').firstElementChild.getAttribute('id');
-    window.location.href = `http://localhost/geocation/html/diary_detail.php?id=${parentitemid}`;
+      window.location.href = `http://localhost/geocation/php/diary_detail.php?id=${parentitemid}`;
   }
-  
 });
 
-}
+//もっと見るボタン処理ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+document.querySelector('#more_recommendation').addEventListener('click', (event) => {
+
+});
+
+document.querySelector('#more_spotrank').addEventListener('click', (event) => {
+  window.location.href = `ranking.php?id=1`;
+});
+
+document.querySelector('#more_diaryrank').addEventListener('click', (event) => {
+  window.location.href = `ranking.php?id=2`;
+});
+
+//もっと見るボタン処理ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+

@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </header>
     <main>
-        <div class="container">
+       
             <?php if (!empty($errors)): ?>
                 <div class="error-messages">
                     <?php foreach ($errors as $error): ?>
@@ -110,12 +110,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
             <?php endif; ?>
             <form action="spot_post.php" method="post" enctype="multipart/form-data">
+            <h1>スポット投稿</h1>
+            <div class="container">
                 <div class="left-section">
-                    <h1>スポット投稿</h1>
+                    
                     <label for="photo">写真を選択</label>
-                    <div class="form-group">
+                    <div class="photo-group">
                         <input type="file" id="photo" name="photo" accept="image/*" required>
-                        <div id="imagePreview"></div>
+                        <label for="photo" id="photo-label"></label>
+                        <div id="photo-preview"></div>
                     </div>
                 </div>
                 <div class="right-section">
@@ -135,13 +138,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <div class="form-group">
                         <textarea id="memo" name="memo"></textarea>
                     </div>
-                    <div class="button-group">
+
+                </div>
+                </div>
+                <div class="button-group">
                         <a href="./homepage.php" class="BackButton">戻る</a>
                         <button type="submit" class="decisionButton">決定</button>
                     </div>
-                </div>
             </form>
-        </div>
+        
     </main>
+    <script src="../js/spot_post.js"></script>
 </body>
 </html>

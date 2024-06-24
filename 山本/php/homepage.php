@@ -8,30 +8,6 @@ if (!isset($_SESSION['USER_ID'])) {
     exit();
 }
 
-// データベース接続
-// $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
-// try {
-//     $conn = new PDO($dsn, DB_USER, DB_PASS);
-//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-//     // スポット情報を取得
-//     $stmtSpots = $conn->prepare("
-//         SELECT SPOTNAME, PHOTO, REMARKS
-//         FROM SPOTS_POSTING
-//         ORDER BY CREATED_AT DESC
-//         LIMIT 8
-//     ");
-//     $stmtSpots->execute();
-//     $popularSpots = $stmtSpots->fetchAll(PDO::FETCH_ASSOC);
-
-//     // 人気日記を取得
-//     $stmtDiaries = $conn->prepare("SELECT TITLE, PHOTO, FROM DIARYS_POSTING ORDER BY GOOD DESC LIMIT 8");
-//     $stmtDiaries->execute();
-//     $popularDiaries = $stmtDiaries->fetchAll(PDO::FETCH_ASSOC);
-
-// } catch (PDOException $e) {
-//     die("Connection failed: " . $e->getMessage());
-// }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -65,20 +41,20 @@ if (!isset($_SESSION['USER_ID'])) {
       <div id=section-item>
         <div class="section-header">
             <h2>オススメの観光地</h2>
-            <a class="more-link" href="./ranking.php">もっと見る</a>
+            <div id = "more_recommendation" class="more-link" >もっと見る</div>
         </div>
         <section id="spot-reco">
         </section>
 
         <div class="section-header">
             <h2>スポットの人気ランキング</h2>
-            <a class="more-link" href="./ranking.php">もっと見る</a>
+            <div id = "more_spotrank" class="more-link" >もっと見る</div>
         </div>
         <section id="spot-rank">
         </section>
         <div class="section-header">
             <h2>日記人気ランキング</h2>
-            <a class="more-link" href="./ranking.php">もっと見る</a>
+            <div id = "more_diaryrank" class="more-link" >もっと見る</div>
         </div>
         <section id="diary-rank">
         </section>

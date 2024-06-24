@@ -10,7 +10,7 @@ $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET
 try {
   $conn = new PDO($dsn, DB_USER, DB_PASS);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+  
   // 取得した情報を変数に格納
   $returndata = array();
 

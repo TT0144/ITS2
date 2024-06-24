@@ -55,6 +55,6 @@
     </div>
 </main>
 
-<script src="../js/rannking.js"></script>
+<script src="../js/ranking.js"></script>
 </body>
 </html>

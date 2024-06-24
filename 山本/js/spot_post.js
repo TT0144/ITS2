@@ -1,25 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const stars = document.querySelectorAll('.star');
-
-// デフォルトで★5つを選択状態にする
-stars.forEach(star => {
-    if (star.getAttribute('data-value') <= 5) {
-        star.classList.add('selected');
-    }
-});
-
-stars.forEach(star => {
-    star.addEventListener('click', () => {
-        const value = star.getAttribute('data-value');
-        stars.forEach(s => {
-            if (s.getAttribute('data-value') <= value) {
-                s.classList.add('selected');
-            } else {
-                s.classList.remove('selected');
-            }
-        });
-    });
-});
 
     // 写真のプレビュー表示の設定
     const photoInput = document.getElementById('photo');
@@ -31,7 +9,7 @@ stars.forEach(star => {
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                const img = document.createElement('img')
+                const img = document.createElement('img');
                 img.src = e.target.result;
                 img.style.maxWidth = '100%';
                 img.style.maxHeight = '100%';
@@ -44,13 +22,5 @@ stars.forEach(star => {
             };
             reader.readAsDataURL(file);
         }
+
     });
-});
-
-// 遷移しながら値を渡す
-document.querySelector('.addcomp').addEventListener('click', () => {
-  const imgid = '../img/facebook.png'
-  window.location.href = `http://localhost/geocation/html/diary_detail.html?value=${imgid}`;
-});
-
-//詳細画面からのリダイレクト拒否

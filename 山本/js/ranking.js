@@ -1,42 +1,69 @@
+//スポットか日記のもっと見るを取得
+const urlParams = new URLSearchParams(window.location.search);
+const spotName = urlParams.get('SPOTNAME');
+const type = urlParams.get('TYPE');
+console.log('受け取った値:', spotName, type);
+
+const divide_id = urlParams.get('id');
+console.log('受け取った値:',divide_id );
+
 //DOM読み取り
 const results = document.querySelector('#results');
 const searchboxvalue = document.querySelector('#searchbox');
 const radioboxitem = document.querySelector('#radioboxitem');
 const listitem = document.querySelector('#listitem');
 var baranch_num = 0
-setradiobotton_update();
 
-//スポットランキング時処理
+//もっと見るからページを読み込んだ時
+if(divide_id == 0 || divide_id == null){
+
+//スポット
+}else if(divide_id == 1){
+  display_spotrank();
+//日記
+}else{
+  display_diaryrankk();
+}
+//スポットランキングボタン処理
 document.querySelector('#spot-ranking').addEventListener('click', () => {
-  removeresultitems();
+  display_spotrank();
+});
+
+//日記ランキングボタン処理
+document.querySelector('#diary-ranking').addEventListener('click', () => {
+  display_diaryrankk();
+});
+
+//ランキング表示処理
+function display_spotrank(){
+  removeresultitem_spots();
   removeserchbox_items();
   removeradiobotton();
   setradiobotton_order();
   baranch_num = 1;
   setitem(1,"",2);
-});
+}
 
-//日記ランキング時処理
-document.querySelector('#diary-ranking').addEventListener('click', () => {
-  removeresultitems();
+//日記表示処理
+function display_diaryrankk(){
+  removeresultitem_spots();
   removeserchbox_items();
   removeradiobotton();
   setradiobotton_order();
   baranch_num = 2;
   createresult_items(2,"",2);
-});
+}
 
-//抽象化クリエイト
+//抽象化アイテムクリエイト
 function createresult_items(branch,sort_text,radiovalue){
   setitem(branch,sort_text,radiovalue);
 }
 //検索項目時処理
 document.querySelector('#search-button').addEventListener('click', () => {
-  removeresultitems();
+  removeresultitem_spots();
   removeserchbox_items();
   removeradiobotton();
   serchbox_items();
-  setradiobotton_update();
 });
 
 //ラジオボタン削除
@@ -74,13 +101,13 @@ function removeserchbox_items(){
 function setradiobotton_order(){
   radioboxitem.insertAdjacentHTML('afterbegin', 
     `<input type="radio" name="radiobotton" value="1">昇順
-    <input type="radio" name="radiobotton" value="2">降順`);
+    <input type="radio" name="radiobotton" value="2"checked="checked">降順`);
 }
 
 //更新日時変更ラジオボタン表示
 function setradiobotton_update(){
   radioboxitem.insertAdjacentHTML('afterbegin', 
-    `<input type="radio" name="radiobotton" value="3">新しい順
+    `<input type="radio" name="radiobotton" value="3"checked="checked">新しい順
     <input type="radio" name="radiobotton" value="4">古い順`);
 }
 
@@ -93,12 +120,22 @@ function checkradiobotton(){
 }
 
 //結果表示を消す
-function removeresultitems(){
+function removeresultitem_spots(){
   //既にある要素を削除
   while(results.firstChild){
     results.removeChild(results.firstChild);
   }
 }
+// URLパラメータからタイトルを取得し、検索ボックスに設定
+window.onload = function() {
+  if (spotName) {
+    searchbox.value = spotName;
+    document.querySelector('#selectsort').value = type || '0'; // デフォルトは全てのカテゴリ
+    setitem(type || '0', spotName, 3); // デフォルトで最新順にソート
+    setradiobotton_update();
+  }
+};
+
 //APIにデータを送って表示
 //以下引数(第一：日記スポットかあるいはどっちも、第二：検索文字、第三：ラジオボタンの入力（value))
 function setitem(resbranch,sort_text,radiovalue){
@@ -112,32 +149,45 @@ function setitem(resbranch,sort_text,radiovalue){
     .then(response => response.json()) // 返ってきたレスポンスをjsonで受 け取って次のthenへ渡す
     .then(res => {
       console.log(res)
-      if(resbranch == 0 || resbranch == 1){
-        res[0]["SPOT"].forEach(element => {
-          resultitem(results,element['PHOTO'],element['SPOTNAME'],element['SPOTNAME'],element["SPOT_ID"],element["REMARKS"])
-        });
-      }
       if(resbranch == 0 || resbranch == 2){
-        res[0]["DIARY"].forEach(element => {
+        res[0]["DIARY"].forEach(element => {  
           if(!element['PHOTO']){
             element['PHOTO'] = '../img/noimage.png'
           }
-          console.log(element['PHOTO']);
-          resultitem(results,element['PHOTO'],element['TITLE'],element['TITLE'],element["DIARY_ID"],element["TEXT"])
+          resultitem_diary(results,element['PHOTO'],element['TITLE'],element['TITLE'],element["DIARY_ID"],element["TEXT"])
         });    
       }
+      if(resbranch == 0 || resbranch == 1){
+        res[0]["SPOT"].forEach(element => {
+          resultitem_spot(results,element['PHOTO'],element['SPOTNAME'],element['SPOTNAME'],element["SPOT_ID"],element["REMARKS"])
+        });
+      }
+
     })
 .catch(error => {
     console.log(error); // エラー表示
 });
   
 }
-//ソート結果を表示
-function resultitem(element,img_url,img_name,title_name,spot_id,item_text){
+//ソート結果を表示(スポット)
+function resultitem_spot(element,img_url,img_name,title_name,spot_id,item_text){
   element.insertAdjacentHTML('afterbegin', 
-  `<div class="resultitem">
+  `<div class="resultitem spot">
     <div class="itemimg">
-        <img src=../uploads/${img_url} alt=${img_name} id=${spot_id}"width="200" height="210">
+        <img src=../uploads/${img_url} alt=${img_name} id=${spot_id} width="200" height="210">
+    </div>
+    <div class="item-explan">
+        <div class="list-title">${title_name}</div>
+        <div>${item_text}</div>
+    </div>
+  </div>`);
+}
+//ソート結果を表示(スポット)
+function resultitem_diary(element,img_url,img_name,title_name,spot_id,item_text){
+  element.insertAdjacentHTML('afterbegin', 
+  `<div class="resultitem diary">
+    <div class="itemimg">
+        <img src=../uploads/${img_url} alt=${img_name} id=${spot_id} width="200" height="210">
     </div>
     <div class="item-explan">
         <div class="list-title">${title_name}</div>
@@ -147,29 +197,53 @@ function resultitem(element,img_url,img_name,title_name,spot_id,item_text){
 }
 
 
+
 //検索機能
 listitem.addEventListener('click', (event) => {
   if(event.target.closest('#searchicon')){
-    removeresultitems();
+    removeresultitem_spots();
     //ラジオボタン、入力、プルダウンの読み取り
-    const radiovalue = checkradiobotton();
+    // const radiovalue = checkradiobotton();
     const searchboxvalue = document.querySelector('#searchbox').value;
     const pulldownvalue = document.querySelector('#selectsort').value;
     if(!searchboxvalue == ""){
-      setitem(pulldownvalue,searchboxvalue,radiovalue);
+      setitem(pulldownvalue,searchboxvalue,3);
+      removeradiobotton();
+      setradiobotton_update();
     }else{
       //要素削除
-      removeresultitems();
+      removeresultitem_spots();
     }
   }
-  //ラジオボタンを変更したとき
+  //ラジオボタン(昇順降順）を変更したとき
   if(event.target.closest('[type="radio"]')){
     const radiovalue = checkradiobotton();
     if(radiovalue == 1 || radiovalue == 2 ){
-      removeresultitems();
+      removeresultitem_spots();
       setitem(baranch_num,"",radiovalue);
     }
-  }
+  } 
+    //ラジオボタン(昇順降順）を変更したとき
+    if(event.target.closest('[type="radio"]')){
+      const radiovalue = checkradiobotton();
+      const searchboxvalue = document.querySelector('#searchbox').value;
+      const pulldownvalue = document.querySelector('#selectsort').value;
+
+      if(radiovalue == 3 || radiovalue == 4 ){
+        removeresultitem_spots();
+        setitem(pulldownvalue,searchboxvalue,radiovalue);
+      }
+    }
 });
 
+results.addEventListener('click', (event) => {
+  if(event.target.closest('.spot')){
+    // console.log(event.target.closest('.spot'));
+    const  parentitemid = event.target.closest('.spot').firstElementChild.firstElementChild.getAttribute('id');
+    window.location.href = `http://localhost/geocation/php/spot_detail.php?id=${parentitemid}`;
+  }else{
+    const  parentitemid = event.target.closest('.diary').firstElementChild.firstElementChild.getAttribute('id');
+      window.location.href = `http://localhost/geocation/php/diary_detail.php?id=${parentitemid}`;
+  }
 
+});

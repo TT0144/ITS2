@@ -6,6 +6,28 @@ body {
   background-color: #F2E9B6;
 }
 
+@media (max-width: 600px) {
+  .resultitem {
+      flex-direction: column;
+  }
+  .itemimg,item-explan{
+    width: 100%;
+  }
+  .itemimg{
+    max-width: 100%;
+    height: auto;
+  }
+  .list-title{
+    text-align: center;
+    margin:  5px;
+  }
+ 
+
+
+
+
+}
+
 header {
   background-color: #F2E9B6;
   display: flex;
@@ -193,4 +215,11 @@ main{
 .list-title{
   font-size: 30px;
  padding-bottom: 20px;
+}
+.itemimg img{
+  width: 500px;
+    height: 220px; 
+    max-width: 100%;
+    border-radius: 10px 0px 0px 10px;
+     object-fit: cover;
 }

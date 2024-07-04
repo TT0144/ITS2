@@ -132,6 +132,9 @@ main {
     text-align: center;
     box-sizing: border-box;
 }
+.spot:hover{
+    transform: translateY(-10px);
+}
 
 .spot img {
     max-width: 100%;
@@ -148,9 +151,14 @@ main {
   text-align: center;
   box-sizing: border-box;
 }
+.diary:hover{
+    transform: translateY(-10px);
+}
 
 .diary img {
   max-width: 100%;
+  width: 300px;
+  height: 200px;
   border-radius: 10px 10px 0 0;
 }
 

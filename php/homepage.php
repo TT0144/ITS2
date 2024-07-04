@@ -1,37 +1,13 @@
 <?php
 session_start();
-// require_once __DIR__ . "/def.php";
+//  require_once __DIR__ . "/def.php";
 
 // ログインセッションの確認
 if (!isset($_SESSION['USER_ID'])) {
     header("Location: login.php");
     exit();
 }
-
-// データベース接続
-// $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
-// try {
-//     $conn = new PDO($dsn, DB_USER, DB_PASS);
-//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-//     // スポット情報を取得
-//     $stmtSpots = $conn->prepare("
-//         SELECT SPOTNAME, PHOTO, REMARKS
-//         FROM SPOTS_POSTING
-//         ORDER BY CREATED_AT DESC
-//         LIMIT 8
-//     ");
-//     $stmtSpots->execute();
-//     $popularSpots = $stmtSpots->fetchAll(PDO::FETCH_ASSOC);
-
-//     // 人気日記を取得
-//     $stmtDiaries = $conn->prepare("SELECT TITLE, PHOTO, FROM DIARYS_POSTING ORDER BY GOOD DESC LIMIT 8");
-//     $stmtDiaries->execute();
-//     $popularDiaries = $stmtDiaries->fetchAll(PDO::FETCH_ASSOC);
-
-// } catch (PDOException $e) {
-//     die("Connection failed: " . $e->getMessage());
-// }
+$userName = isset($_SESSION['NAME']) ? $_SESSION['NAME'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -57,31 +33,36 @@ if (!isset($_SESSION['USER_ID'])) {
             </nav>
         </div>
         <div class="header-right">
-            <a href="./login.php" class="login-button">新規登録・ログイン</a>
+            <?php if ($userName): ?>
+                <a class="user-icon" href="./homepage.php"> 
+                    <img src="../img/user_icon.jpg" alt="User Icon">
+                    <span><?php echo htmlspecialchars($userName); ?></span>
+            </a>
+            <?php else: ?>
+                <a href="./login.php" class="login-button">新規登録・ログイン</a>
+            <?php endif; ?>
         </div>
     </header>
     <!-- メイン画面 -->
     <main>
-      <div id=section-item>
-        <div class="section-header">
-            <h2>オススメの観光地</h2>
-            <a class="more-link" href="./ranking.php">もっと見る</a>
-        </div>
-        <section id="spot-reco">
-        </section>
+        <div id="section-item">
+            <div class="section-header">
+                <h2>オススメの観光地</h2>
+                <div id="more_recommendation" class="more-link">もっと見る</div>
+            </div>
+            <section id="spot-reco"></section>
 
-        <div class="section-header">
-            <h2>スポットの人気ランキング</h2>
-            <a class="more-link" href="./ranking.php">もっと見る</a>
-        </div>
-        <section id="spot-rank">
-        </section>
-        <div class="section-header">
-            <h2>日記人気ランキング</h2>
-            <a class="more-link" href="./ranking.php">もっと見る</a>
-        </div>
-        <section id="diary-rank">
-        </section>
+            <div class="section-header">
+                <h2>スポットの人気ランキング</h2>
+                <div id="more_spotrank" class="more-link">もっと見る</div>
+            </div>
+            <section id="spot-rank"></section>
+
+            <div class="section-header">
+                <h2>日記人気ランキング</h2>
+                <div id="more_diaryrank" class="more-link">もっと見る</div>
+            </div>
+            <section id="diary-rank"></section>
         </div>
     </main>
     <footer>

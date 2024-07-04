@@ -67,7 +67,6 @@ main {
     background-color: #FFFEDE;
 }
 
-/* Additional styles for the rest of the layout */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -133,17 +132,11 @@ main {
     text-align: center;
     box-sizing: border-box;
 }
-.spot:hover{
-    transform: translateY(-10px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
 
 .spot img {
-    width: 450px;
-    height: 200px; 
     max-width: 100%;
+    height: 200px;
     border-radius: 10px 10px 0 0;
-     object-fit: cover;
 }
 .diary {
   background-color: white;
@@ -156,22 +149,14 @@ main {
   box-sizing: border-box;
 }
 
-.diary:hover{
-    transform: translateY(-10px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
 .diary img {
-    width: 450px;
-    height: 200px; 
-    max-width: 100%;
-    border-radius: 10px 10px 0 0;
-     object-fit: cover;
+  max-width: 100%;
+  border-radius: 10px 10px 0 0;
 }
 
 footer {
     background-color: #F2E9B6;
-    color: black;
+    color: white;
     text-align: center;
     padding: 10px 0;
     position: relative;
@@ -203,3 +188,23 @@ footer small {
     display: block;
     margin-top: 10px;
 }
+/* .spot-section .spot {
+    display: none;
+} */
+.user-icon {
+    display: flex;
+    align-items: center;
+    
+}
+.header-right a{
+    text-decoration: none;
+    
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+

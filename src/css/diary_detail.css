@@ -1,0 +1,278 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    box-sizing: border-box;
+    align-items: center;
+   background-color: #F2E9B6;
+  }
+  header {
+    background-color: #F2E9B6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: auto;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-left h1 img {
+    display: block;
+    width: 300px;
+    height: 80px;
+    margin-right: 20px;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  nav ul li {
+    margin-left: 20px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    position: relative; /* 追加: ドロップダウンの位置を相対的に設定 */
+  }
+  
+  .user-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px; /* 追加: アイコンとメニューの間にマージンを追加 */
+  }
+  
+  .user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .profile-dropdown {
+    position: absolute;
+    top: 70px; 
+    right: 0;
+    width: 200px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  
+  .profile-container {
+    padding: 20px;
+  }
+  
+  .profile-header {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .profile-details label {
+    display: block;
+    font-weight: bold;
+    margin-top: 100px;
+  }
+  
+  
+  .profile-container button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: #F2E9B6;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .profile-container button:hover {
+    background-color: #e4dc09;
+  }
+  
+  .profile-container button[name="logout"] {
+    background-color: red;
+  }
+  
+  .profile-container button[name="logout"]:hover {
+    background-color: #9d0716;
+  }
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: 0.4s;
+  }
+  .menu {
+    margin-left: 10px; 
+    margin-right: 10px;
+    cursor: pointer;
+  }
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: #FFFEDE;
+    }
+
+    #content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 90%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #F2E9B6;
+        gap: 80px;
+       
+    }
+
+    .image-container img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        max-width: 100%;  /* 最大幅をコンテナに合わせる */
+    width: 90%;  /* 幅を自動調整 */
+    height: 90%;  /* 高さは自動調整 */
+        background-color: white;
+        max-height: 800px; 
+        border-radius: 10px;
+    }
+
+
+    .detail {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .detail h2 {
+        font-size: 30px;
+    }
+    .detail p {
+        margin: 0;
+    }
+
+    .detail #text {
+        
+        background-color: white;
+        margin-top: 10px;
+        width: auto;  
+        height: auto;  /* 高さをautoにして自動で調整させる */
+        word-wrap: break-word; /* 長い単語も自動的に改行される */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 1rem;
+        overflow-wrap: break-word; /* 必要に応じて長いテキストを折り返す */
+        white-space: normal; /* 改行を許可する */
+    }
+    .detail #gooditem {
+        display: flex; /* Flexbox レイアウトを使用 */
+        align-items: center; /* 垂直方向に中央揃え */
+        justify-content: space; /* アイテム間にスペースを追加し、左右に配置 */
+        gap: 20px; /* アイテム間のスペース */
+        margin-top: 10px; /* 上部のマージンを追加 */
+    }
+    
+    .detail #gooditem #good_count{
+       margin-top: 10px;
+        
+    }
+
+    #BackButton {
+        margin-top: 10px;
+        background-color: #444;
+        color: #fff;
+        border: none;
+        padding: 10px 40px; 
+        border-radius: 20px;
+        cursor: pointer;
+        width: 300px; 
+        text-align: center; 
+    }
+    #BackButton:hover {
+        background-color: #5a6268;
+    }
+
+    
+    @media (orientation: portrait) and (max-width: 768px){
+        header{
+            background-color: #F2E9B6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-left h1 img {
+            display: block;
+            width: 130px;
+            height: 40px;
+            margin-right: auto;
+        }
+        nav ul li a {
+            text-decoration: none;
+            font-size: 15px;
+            color: black;
+            font-weight: bold;
+          }
+        #content {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 90%;
+        }
+    
+        .image-container img {
+            width: 100%; /* 画像を幅いっぱいに */
+            height: auto; /* 高さを自動調整 */
+        }
+    
+        .detail h2 {
+            font-size: 1.5rem; /* スマホ向け見出しのフォントサイズ */
+        }
+    
+        .detail #gooditem {
+            flex-direction: row; /* 横並びにする */
+            align-items: center; /* アイテムを垂直方向に中央揃え */
+            justify-content: space; /* アイテム間にスペースを追加し、左右に配置 */
+        }
+    
+        .detail #gooditem img {
+            width: 60px; /* スマホ向けいいねボタンのサイズ */
+        }
+    
+        .detail #good_count {
+            font-size: 2rem; /* スマホ向けいいね数のフォントサイズ */
+        }
+    
+        .detail #text {
+            padding: 5px; /* スマホ向けテキストエリアのパディング */
+            font-size: 0.9rem; /* スマホ向けテキストのフォントサイズ */
+            max-height: 300px; /* スマホ向けテキストの最大高さ */
+        }
+    }

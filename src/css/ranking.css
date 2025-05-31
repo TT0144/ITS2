@@ -1,0 +1,393 @@
+/* 基本のボックスモデルと背景設定 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  box-sizing: border-box;
+  align-items: center;
+ background-color: #F2E9B6;
+}
+header {
+  background-color: #F2E9B6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: auto;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-left h1 img {
+  display: block;
+  width: 300px;
+  height: 80px;
+  margin-right: 20px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  position: relative; /* 追加: ドロップダウンの位置を相対的に設定 */
+}
+
+.user-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px; /* 追加: アイコンとメニューの間にマージンを追加 */
+}
+
+.user-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.profile-dropdown {
+  position: absolute;
+  top: 70px; 
+  right: 0;
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+
+.profile-container {
+  padding: 20px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.profile-details label {
+  display: block;
+  font-weight: bold;
+  margin-top: 100px;
+}
+
+
+.profile-container button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: #F2E9B6;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.profile-container button:hover {
+  background-color: #e4dc09;
+}
+
+.profile-container button[name="logout"] {
+  background-color: red;
+}
+
+.profile-container button[name="logout"]:hover {
+  background-color: #9d0716;
+}
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+.menu {
+  margin-left: 10px; 
+  margin-right: 10px;
+  cursor: pointer;
+}
+main{
+  padding: 20px;
+  background-color: #FFFEDE;
+}
+
+#split{
+  display: flex;
+
+}
+#split-child{
+  flex: 0 0 20%;
+  margin-right: 32px;
+}
+
+
+
+#button-group{
+  display:flex;
+  flex-flow: column;
+}
+.buttonsec{
+  background: #eee;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 240px;
+  padding: 10px 25px;
+  color: #313131;
+  transition: 0.3s ease-in-out;
+  border-radius: 10px;
+}
+.buttonsec:hover{
+  background: #313131;
+  color: #FFF;
+}
+
+#listitem{
+  flex: 1 0 80%;
+  display:block;
+}
+
+
+#ranking-select{
+  height: 20px;
+  display: flex;
+  padding-bottom: 30px;
+
+}
+#selectsort{
+  color: #ffffff;
+  background-color: #393D48;
+  width: 16%;
+  height: 125%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  text-align-last: center
+}
+
+#serchbox{
+  height: 95%;
+  width: 40%;
+}
+#searchbox{
+  height: 95%;
+  width: 40%;
+}
+
+/* PHPのCSS */
+#searchbox:focus{
+  outline: 0;
+  box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+}
+
+#serchbox:focus{
+  outline: 0;
+  box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+}
+#serchicon{
+  height: 125%;
+  width: 5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  text-align: center;
+  background-color: rgba(191, 165, 70, 0.792);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+#serchicon:hover{
+  background: rgba(196, 153, 1, 0.792);
+}
+
+/* PHPのCSS */
+#searchicon{
+  height: 125%;
+  width: 5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  text-align: center;
+  background-color: rgba(191, 165, 70, 0.792);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+/*PHPのCSS*/
+#searchicon:hover{
+  background: rgba(196, 153, 1, 0.792);
+}
+
+.itemimg{
+  height: auto;
+  text-align:center;
+}
+.photoimg{
+  vertical-align:top;
+}
+.resultitem{
+  height: auto;
+ width: auto;
+ display: flex;
+ box-sizing: border-box; 
+ border: 1px solid #333;
+ background-color: #ffffff; 
+ border-radius: 10px;
+ margin: 20px;
+ overflow: hidden;
+}
+
+.item-explan{
+ width: auto;
+ word-wrap: break-word; /* 長い単語も自動的に改行される */
+ overflow-wrap: break-word; /* 必要に応じて長いテキストを折り返す */
+white-space: normal; /* 改行を許可する */
+}
+
+.list-title{
+  font-size: 30px;
+ padding-bottom: 20px;
+}
+.item-text{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /*任意の行数を指定*/
+}
+.results{
+  width: 100%;
+}
+@media (orientation: portrait) and (max-width: 768px) {
+  header {
+    background-color: #F2E9B6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: auto;
+  }
+
+  .header-left h1 img {
+    display: block;
+    width: 130px;
+    height: 40px;
+    margin-right: 5px;
+  }
+  nav ul li{
+    margin-left: 15px;
+  }
+  nav ul li a {
+    font-size: 15px;
+  }
+  
+  .menu {
+    margin-left: 10px; 
+    margin-right: 10px;
+  }
+  main {
+    padding-right: 30px;
+    background-color: #FFFEDE;
+  }
+
+  #split {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #split-child {
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+  }
+
+  #button-group {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .buttonsec {
+    background: #eee;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 10px 10px;
+    margin: 5px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    border-radius: 10px;
+  }
+
+  .buttonsec:hover {
+    background: #313131;
+    color: #FFF;
+  }
+
+  #selectsort {
+    color: #ffffff;
+    background-color: #393D48;
+    width: 30%;
+    height: 125%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    text-align-last: center;
+  }
+
+  #searchbox {
+    height: 85%;
+    width: 40%;
+  }
+
+  #searchicon {
+    width: 20%;
+  }
+
+  .resultitem {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .itemimg img {
+    width: 100%;
+    height: auto;
+  }
+
+  .item-explan {
+    padding: 10px;
+  }
+  .results{
+    width: 90%;
+  }
+}

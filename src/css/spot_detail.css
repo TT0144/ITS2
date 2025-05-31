@@ -1,0 +1,311 @@
+/* 基本のボックスモデルと背景設定 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    box-sizing: border-box;
+    align-items: center;
+    background: #FFFEDE;
+}
+header {
+    background-color: #F2E9B6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: auto;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left h1 img {
+    display: block;
+    width: 300px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    position: relative; /* 追加: ドロップダウンの位置を相対的に設定 */
+}
+
+.user-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px; /* 追加: アイコンとメニューの間にマージンを追加 */
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.profile-dropdown {
+    position: absolute;
+    top: 70px; 
+    right: 0;
+    width: 200px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+
+.profile-container {
+    padding: 20px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.profile-details label {
+    display: block;
+    font-weight: bold;
+    margin-top: 100px;
+}
+
+
+.profile-container button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: #F2E9B6;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.profile-container button:hover {
+    background-color: #e4dc09;
+}
+
+.profile-container button[name="logout"] {
+    background-color: red;
+}
+
+.profile-container button[name="logout"]:hover {
+    background-color: #9d0716;
+}
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+.menu {
+    margin-left: 10px; 
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+    main {
+        display: flex;
+        flex-direction: column;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .content {
+
+        background-color: #F2E9B6;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 90%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 30px;
+        position: relative;
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%; 
+        height: 100%; 
+        max-height: 100%;
+        margin: 0 auto;
+    }
+
+    .image-container img {
+        max-width: 100%; 
+    width: auto;
+    height: auto;
+    display: block;
+    max-height: 800px;
+    border-radius: 10px;
+    }
+
+    .detail {
+        flex: 1;
+        padding-left: 20px;
+    }
+
+    .detail h2 {
+        margin-top: 0;
+        font-size: 30px;
+    }
+
+    .detail p {
+        margin: 20px 0;
+        font-weight: bold;
+    }
+    .detail p span {
+        color: blue; 
+        margin-left: 20px; 
+        font-weight: normal;
+    }
+
+    .note {
+        margin-top: 20px;
+        
+    }
+    .note p {
+        margin: 0;
+    }
+
+    #comment  {
+        background-color: white;
+        margin-top: 10px;
+        width: auto;  
+        height: auto;  /* 高さをautoにして自動で調整させる */
+        word-wrap: break-word; /* 長い単語も自動的に改行される */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 1rem;
+        overflow-wrap: break-word; /* 必要に応じて長いテキストを折り返す */
+        white-space: normal; /* 改行を許可する */
+    }
+    .buttons {
+        display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+       margin-bottom: 20px;
+    }
+
+    .buttons a { 
+        width: 13%;
+        background-color: #393D48;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        
+    }
+
+    .diary-view-btn:hover {
+        background-color: #0000ff;
+    }
+    .diary-post-btn:hover {
+        background-color: #0000ff;
+    }
+    .user-icon {
+        display: flex;
+        align-items: center;
+        
+    }
+    .header-right a{
+        text-decoration: none;
+        
+    }
+    
+    .user-icon img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    #edit-delete-buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 10px;
+    }
+    
+    #edit-delete-buttons img {
+        width: 30px;  
+        height: 30px; 
+        cursor: pointer;
+    }
+
+    @media (orientation: portrait) and (max-width: 768px){
+        header{
+            background-color: #F2E9B6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-left h1 img {
+            display: block;
+            width: 130px;
+            height: 40px;
+            margin-right: auto;
+        }
+        nav ul li a {
+            text-decoration: none;
+            font-size: 15px;
+            color: black;
+            font-weight: bold;
+          }
+        .content {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 90%;
+            padding: 10px;
+        }
+    
+        .image-container img {
+            width: auto; /* 画像を幅いっぱいに */
+            height: auto; /* 高さを自動調整 */
+        }
+    
+        .detail h2 {
+            font-size: 1.5rem; /* スマホ向け見出しのフォントサイズ */
+        }
+    
+        .detail #comment {
+            padding: 5px; /* スマホ向けテキストエリアのパディング */
+            font-size: 0.9rem; /* スマホ向けテキストのフォントサイズ */
+        }
+        .buttons a{
+        width: 20%;
+    }
+    }

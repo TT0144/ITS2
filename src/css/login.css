@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+body {
+    min-height: 100vh;
+    font-family: "Roboto", sans-serif;
+}
+/* 戻りボタン */
+[class*="icono"] {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    color: #666;
+    box-sizing: border-box;
+    &:after, &:before {
+      content: "";
+      box-sizing: border-box;
+    }
+  }
+  [class*="icono-arrow2"]{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: solid;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    margin: 10px;
+    transform: rotate(-135deg);
+    &:before{
+      right: 0;
+      top: -3px;
+      position: absolute;
+      height: 4px;
+      box-shadow: inset 0 0 0 32px;
+      transform: rotate(-45deg);
+      width: 15px;
+      transform-origin: right top;
+    }
+  }
+
+/* style login */
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fffede;
+    position: relative;
+}
+.LoginContainer {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+}
+.LoginContainer h1 {
+    margin-bottom: 50px;
+    font-size: 2rem;
+    text-align: center;
+}
+.LoginContainer form {
+    display: flex;
+    flex-direction: column;
+}
+.LoginContainer form label {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+.LoginContainer form input {
+    padding: 10px;
+    color: #01040e;
+    border: 1px solid #cac6c6;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+.LoginContainer form button {
+    max-width: 200px;
+    margin-left: 100px;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background: #0c0c0c;
+    color: #fff;
+    font-size: 1.2rem;
+}
+.LoginContainer form button:hover {
+    background: #555;
+}
+.SignupButton {
+    text-align: center;
+    text-decoration: none;
+    color: #5f18c2;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: block;
+}
+.SignupButton:hover {
+    color: #555;
+}
+/* style signup */
+.backbutton2 {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.backtologin {
+    text-decoration: none;
+    color: #01040e;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+.backtologin:hover {
+    color: #555;
+}
+.signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fffede;
+}
+.SignupContainer {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+.SignupContainer h1 {
+    margin-bottom: 50px;
+    font-size: 2rem;
+    text-align: center;
+}
+.SignupContainer form {
+    display: flex;
+    flex-direction: column;
+}
+.SignupContainer form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+.SignupContainer form button {
+    margin-top: 20px;
+    max-width: 200px;
+    margin-left: 100px;
+    border-radius: 20px;
+    padding: 10px;
+    border: none;
+    background: #333;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.SignupContainer form button:hover {
+    background: #555;
+}
+.SignupContainer form a {
+    text-align: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #333;
+}
+.SignupContainer form a:hover {
+    color: #555;
+}
+.SignupRegisterButton {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-size: 1.2rem;
+    display: block;
+}
+.photo-group {
+    grid-column: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* ボタンを正方形内に配置するための相対位置 */
+    width: 100%;
+    height: 355px;
+    aspect-ratio: 1 / 1; /* 正方形を維持 */
+    background-color: #FFFEDE;
+    border-radius: 5px;
+    padding-bottom: 20px;
+}
+
+.photo-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.photo-group input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.photo-group #photo-preview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #ddd; /* デフォルトの枠線 */
+    border-radius: 5px;
+    background-color: #ddd; /* デフォルトの背景色 */
+}
+
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
